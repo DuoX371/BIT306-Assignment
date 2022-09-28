@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MainService } from '../../main/main.service';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  constructor(public mainService: MainService) { }
 
-  constructor() { }
+  toggleSidenav() {
+    this.mainService.toggleSidenav();
+  }
 
   ngOnInit(): void {
   }

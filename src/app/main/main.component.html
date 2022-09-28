@@ -1,0 +1,42 @@
+
+<mat-sidenav-container class="mat-container" autosize>
+  <mat-sidenav #drawer class="sidenav" mode="side" [opened]="sideNavStatus">
+
+    <div class="sidenav-logo d-flex justify-content-center">
+      <img class="logo" src="assets/images/logo.png" alt="logo">
+    </div>
+    <div class="sidenav-content">
+      <div class="sidenav-split">Home</div>
+      <mat-action-list>
+        <button mat-list-item routerLinkActive="active" routerLink="/"><mat-icon>home</mat-icon>Home</button>
+        <button mat-list-item routerLinkActive="active" routerLink="/test"><mat-icon>dashboard</mat-icon>Test</button>
+      </mat-action-list>
+
+      <div class="sidenav-split">Home 2</div>
+      <mat-action-list>
+        <button mat-list-item routerLinkActive="active" routerLink="/"><mat-icon>home</mat-icon>Home</button>
+        <button mat-list-item routerLinkActive="active" routerLink="/"><mat-icon>dashboard</mat-icon>Dashboard</button>
+      </mat-action-list>
+
+      <div class="sidenav-split">Home 3</div>
+      <mat-action-list>
+        <button mat-list-item routerLinkActive="active" routerLink="/"><mat-icon>home</mat-icon>Home</button>
+        <button mat-list-item routerLinkActive="active" routerLink="/"><mat-icon>dashboard</mat-icon>Dashboard</button>
+      </mat-action-list>
+
+    </div>
+
+
+  </mat-sidenav>
+  <app-header></app-header>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- <mat-drawer-content>
+    dsa
+    <router-outlet></router-outlet>
+  </mat-drawer-content> -->
+
+</mat-sidenav-container>
