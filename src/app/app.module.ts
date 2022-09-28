@@ -8,13 +8,15 @@ import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './include/header/header.component';
 import { MainComponent } from './main/main.component';
 import { TestComponent } from './content/test/test.component';
+import { HomeComponent } from './content/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainComponent,
-    TestComponent
+    TestComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
