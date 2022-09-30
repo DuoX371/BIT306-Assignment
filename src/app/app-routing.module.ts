@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: MainComponent, children: [
     {path: '', component: HomeComponent, data: {title: 'Home'}},
-    {path: 'test', component: TestComponent, data:{title: 'Data'}},
+    {path: 'test', component: TestComponent, data: {title: 'Data'}},
   ]}
 ];
 

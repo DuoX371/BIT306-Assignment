@@ -1,0 +1,20 @@
+.container {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.register {
+  background-color: #321FDB;
+  color: white;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.loginbg {
+  background-image: url('/assets/images/shelter.jpg');
+}
+
+.card {
+  border-color: #321FDB;
+  border-radius: 9px;
+}
