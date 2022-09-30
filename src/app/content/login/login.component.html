@@ -5,16 +5,26 @@
         <div class="container">
           <h1>Login</h1>
           <p class="text-secondary">Sign In to you account</p>
-            <form>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
               <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Username</mat-label>
-                <input type="text" matInput placeholder="Username" required>
+                <input type="text" matInput placeholder="Username" formControlName="username" required>
+                <mat-error *ngIf="loginForm.controls.username.hasError('required')">
+                  Please enter a username.
+                </mat-error>
                 <mat-icon matPrefix>person</mat-icon>
               </mat-form-field>
               <mat-form-field class="w-100" appearance="outline" >
                 <mat-label>Password</mat-label>
                 <mat-icon matPrefix>lock</mat-icon>
-                <input type="password" matInput minlength="4" required>
+                <input type="password" matInput [minlength]="passMinLength" formControlName="password" required>
+                  <mat-error *ngIf="loginForm.controls.password.hasError('required')">
+                    Please enter a password.
+                  </mat-error>
+                  <mat-error *ngIf="loginForm.controls.password.hasError('minlength')">
+                    Password must be at least {{passMinLength}} characters long.
+                  </mat-error>
+
               </mat-form-field>
               <button mat-raised-button color="primary" type="submit">Login</button>
             </form>
@@ -30,3 +40,4 @@
     </div>
   </div>
 </div>
+
