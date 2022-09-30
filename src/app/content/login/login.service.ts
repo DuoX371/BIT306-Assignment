@@ -8,7 +8,7 @@ export class LoginService {
   private users = [
     {username: 'admin', password: 'admin', type: 'admin'},
     {username: 'user', password: 'user', type: 'volunteer'},
-    {username: 'school', password: 'school', type: 'sadmin'},
+    {username: 'sadmin', password: 'sadmin', type: 'sadmin'},
   ]
 
   private currentUser = null;
@@ -16,20 +16,25 @@ export class LoginService {
   constructor() { }
 
   getCurrentUser(){
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    this.currentUser =  JSON.stringify(this.currentUser) === '{}' ? null : this.currentUser;
     return this.currentUser;
   }
 
   setCurrentUser(user: any){
+    localStorage.setItem('currentUser', JSON.stringify(user));
     this.currentUser = user;
   }
 
   login(username: any, password: any){
     const user = this.users.find(u =>  u.username === username && u.password === password)
-    this.setCurrentUser(user === undefined ? null : user);
-    return user === undefined ? null : user;
+    if(user === undefined) return null
+    this.setCurrentUser(user);
+    return user;
   }
 
   logout(){
+    localStorage.removeItem('currentUser');
     this.currentUser = null;
   }
 }

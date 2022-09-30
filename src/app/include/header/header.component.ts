@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/content/login/login.service';
 import { MainService } from '../../main/main.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +9,21 @@ import { MainService } from '../../main/main.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(public mainService: MainService) { }
+  currentUser = this.loginService.getCurrentUser();
+
+  constructor(public mainService: MainService, public loginService: LoginService, public router: Router) { }
 
   toggleSidenav() {
     this.mainService.toggleSidenav();
+  }
+
+  login(){
+    this.router.navigate(['login']);
+  }
+
+  logout(){
+    this.loginService.logout();
+    this.router.navigate(['login']);
   }
 
   ngOnInit(): void {

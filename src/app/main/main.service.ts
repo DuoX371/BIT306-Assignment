@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
   providedIn: 'root'
 })
 export class MainService {
+  //nav bar state
   private _sidenavOpen: boolean = true;
   private _sidenavOpenUpdate = new Subject<boolean>();
 
