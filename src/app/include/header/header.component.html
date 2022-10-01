@@ -5,6 +5,8 @@
     <span>Dashboard</span>
     <span class="nav-right"></span>
     <button mat-icon-button class="last" *ngIf="currentUser === null" (click)="login()"><mat-icon>login</mat-icon> Login</button>
+
+    <p class="welcome" *ngIf="currentUser !== null">Welcome <b class="username">{{currentUser.username}}</b></p>
     <button mat-icon-button class="last" *ngIf="currentUser !== null" (click)="logout()"><mat-icon>logout</mat-icon> Logout</button>
   </mat-toolbar-row>
 

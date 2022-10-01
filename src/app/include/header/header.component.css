@@ -5,3 +5,14 @@
 .last {
   margin-right: 3em;
 }
+
+.welcome {
+  padding-top: 1em;
+  font-size: .8em;
+  margin-right: 4em;
+}
+
+.username {
+  color:cadetblue;
+  text-transform: uppercase;
+}

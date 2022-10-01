@@ -38,6 +38,7 @@ export class LoginService {
     data['type'] = 'volunteer';
     if(this.users.find(u => u.username === data['username']) !== undefined) return false;
     this.users.push(data);
+    console.log(data);
     return true;
   }
 
