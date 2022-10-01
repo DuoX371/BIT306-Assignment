@@ -31,8 +31,7 @@ export class HeaderComponent implements OnInit {
     if(this.router.url === '/'){
       switch (this.currentUser.type) {
         case 'admin' : this.router.navigate(['register-school-admin']); break;
-        case 'sadmin' : //this.router.navigate(['register-school']);
-        break;
+        case 'sadmin' : this.router.navigate(['register-school']); break;
         default: break;
       }
     }

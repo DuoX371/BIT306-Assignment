@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { LoginService } from '../login/login.service';
-import { SchoolService } from '../register-school/school.service';
-import { RequestService } from './request.service';
+import { SchoolService } from '../../services/school.service';
+import { RequestService } from '../../services/request.service';
 
 @Component({
   selector: 'app-submit-request',

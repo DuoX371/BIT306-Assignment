@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../login/login.service';
-import { SchoolService } from '../register-school/school.service';
+import { LoginService } from '../content/login/login.service';
+import { SchoolService } from './school.service';
 
 
 @Injectable({

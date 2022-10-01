@@ -6,9 +6,6 @@
       <img class="logo" src="assets/images/logo.png" alt="logo">
     </div>
     <div class="sidenav-content">
-      <!-- Temp -->
-      {{currentUser?.type ? currentUser.type : 'not logged in'}}
-
        <!-- Admin -->
       <div *ngIf="currentUser?.type == 'admin'">
         <div class="sidenav-split">Admin</div>

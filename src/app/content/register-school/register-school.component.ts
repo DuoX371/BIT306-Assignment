@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { SchoolService } from './school.service';
+import { SchoolService } from '../../services/school.service';
 
 @Component({
   selector: 'app-register-school',
