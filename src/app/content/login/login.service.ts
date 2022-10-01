@@ -26,20 +26,19 @@ export class LoginService {
     this.currentUser = user;
   }
 
-  login(username: any, password: any){
-    const user = this.users.find(u =>  u.username === username && u.password === password)
+  login(data: any | object){
+
+    const user = this.users.find(u =>  u.username === data.username && u.password === data.password)
     if(user === undefined) return null
     this.setCurrentUser(user);
     return user;
   }
 
-  registerVolunteer(username: any, password: any, fullname: any, email: any, phone:any, occupation:any, dateofbirth:any, userType:any){
-    const user = this.users.push(username,password,fullname,email,phone,occupation,dateofbirth,userType)
-    // console.log(username,password,fullname,email,phone,occupation,dateofbirth,userType)
-
-    if(user === undefined) return null
-
-    return user;
+  registerVolunteer(data: any | object){
+    data['type'] = 'volunteer';
+    if(this.users.find(u => u.username === data['username']) !== undefined) return false;
+    this.users.push(data);
+    return true;
   }
 
   logout(){

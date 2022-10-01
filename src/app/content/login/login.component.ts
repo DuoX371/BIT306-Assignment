@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     if(!this.loginForm.valid) return;
-    const user = this.loginService.login(this.loginForm.value.username, this.loginForm.value.password);
+    const user = this.loginService.login(this.loginForm.value);
     if(user === null){
       Swal.fire({
         icon: 'error',
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   onRegister(){
-    this.registerPop.open(RegisterVolunteerComponent)
+    this.registerPop.open(RegisterVolunteerComponent);
   }
 
   ngOnInit(): void {
