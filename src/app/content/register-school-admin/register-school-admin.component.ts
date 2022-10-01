@@ -10,12 +10,18 @@ import { LoginService } from '../login/login.service';
 })
 export class RegisterSchoolAdminComponent implements OnInit {
   passMinLength = 4;
+  phoneFormat = '[0-9]{10}';
   constructor(public loginService: LoginService) { }
 
   registerSchoolAdminForm = new FormGroup({
     username: new FormControl<string>('', Validators.required),
     password: new FormControl<string>('', {validators: [Validators.required, Validators.minLength(this.passMinLength)]}),
     confirmPassword: new FormControl<string>('', {validators: [Validators.required,Validators.minLength(this.passMinLength)]}),
+    fullname: new FormControl<string>('', Validators.required),
+    email: new FormControl<string>('', {validators: [Validators.required, Validators.email]}),
+    phone: new FormControl<string>('', {validators: [Validators.required, Validators.pattern(this.phoneFormat)]}),
+    staffid: new FormControl<string>('', Validators.required),
+    position: new FormControl<string>('', Validators.required),
   }, {validators: this.validatePassword('password', 'confirmPassword')})
 
   validatePassword(password: string, confirmPassword: string): ValidatorFn {

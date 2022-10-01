@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 export class LoginService {
 
   private users = [
-    {username: 'admin', password: 'admin', type: 'admin'},
-    {username:"user", password:"user", fullname:"User1", email:"user@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"2022-09-07", type:"volunteer"},
-    {username: 'sadmin', password: 'sadmin', type: 'sadmin'},
+    {id: 1, username: 'admin', password: 'admin', type: 'admin'},
+    {id: 2, username: "user", password:"user", fullname: "User1", email:"user@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"2022-09-07", type:"volunteer"},
+    {id: 3, username: "sadmin", password:"sadmin", confirmPassword:"sadmin", fullname:"School Admin 1", email:"sadmin@a.a", phone:"0122309882", staffid:"S01", position: "Manager", type:"sadmin"}
   ]
 
   private currentUser = null;
@@ -44,7 +44,6 @@ export class LoginService {
     data['type'] = 'sadmin';
     if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
     this.users.push(data);
-    console.log(data);
     return true;
   }
 

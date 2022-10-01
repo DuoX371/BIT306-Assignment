@@ -16,3 +16,7 @@
   color:cadetblue;
   text-transform: uppercase;
 }
+
+mat-toolbar {
+  background-color: white;
+}

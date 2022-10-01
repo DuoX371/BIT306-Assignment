@@ -15,6 +15,8 @@ import { HomeComponent } from './content/home/home.component';
 import { LoginComponent } from './content/login/login.component';
 import { RegisterVolunteerComponent } from './content/register-volunteer/register-volunteer.component';
 import { RegisterSchoolAdminComponent } from './content/register-school-admin/register-school-admin.component';
+import { SubmitRequestComponent } from './content/submit-request/submit-request.component';
+import { RegisterSchoolComponent } from './content/register-school/register-school.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { RegisterSchoolAdminComponent } from './content/register-school-admin/re
     HomeComponent,
     LoginComponent,
     RegisterVolunteerComponent,
-    RegisterSchoolAdminComponent
+    RegisterSchoolAdminComponent,
+    SubmitRequestComponent,
+    RegisterSchoolComponent
   ],
   imports: [
     BrowserModule,

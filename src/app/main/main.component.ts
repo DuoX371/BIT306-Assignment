@@ -19,15 +19,9 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     //check if user is logged in
-    if(this.loginService.getCurrentUser() === null) {
-      // this.router.navigate(['login']);
-      // Swal.fire({
-      //   icon: 'warning',
-      //   title: 'Please login to continue',
-      //   showConfirmButton: false,
-      //   timer: 3000,
-      //   heightAuto: false //must set heigh auto
-      // })
+    const user = this.loginService.getCurrentUser();
+    if(user !== null) {
+
     }
 
     //nav bar state

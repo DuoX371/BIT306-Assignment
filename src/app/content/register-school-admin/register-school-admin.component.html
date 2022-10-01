@@ -3,6 +3,8 @@
   <div class="card-body w-50">
     <form [formGroup]="registerSchoolAdminForm" (ngSubmit)="onSubmit()">
       <p class="card-text">Create a School admin account</p>
+
+      <!-- Username -->
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Username</mat-label>
         <input type="text" matInput placeholder="Username" formControlName="username" required>
@@ -12,6 +14,7 @@
         <mat-icon matPrefix>person</mat-icon>
       </mat-form-field>
 
+      <!-- Password -->
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Password</mat-label>
         <input type="password" matInput placeholder="Password" formControlName="password" required>
@@ -23,6 +26,8 @@
           </mat-error>
         <mat-icon matPrefix>lock</mat-icon>
       </mat-form-field>
+
+      <!-- Confirm Password -->
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Re-enter Password</mat-label>
         <input type="password" matInput placeholder="Re-enter Password" formControlName="confirmPassword" required>
@@ -34,6 +39,65 @@
       <mat-error *ngIf="registerSchoolAdminForm.hasError('passwordMismatch')" class="error-adjust">
         Password does not match.
       </mat-error>
+
+      <!-- Full Name -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Full Name</mat-label>
+        <input type="text" matInput placeholder="Full Name" formControlName="fullname" required>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.fullname.hasError('required')">
+            Please enter a name.
+          </mat-error>
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Email" formControlName="email" required>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.email.hasError('required')">
+            Please enter an email.
+          </mat-error>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.email.hasError('email')">
+            Invalid format. eg. user@xmail.com.
+          </mat-error>
+        <mat-icon matPrefix>mail</mat-icon>
+      </mat-form-field>
+
+      <!-- Phone Number -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Phone No.</mat-label>
+        <input type="tel" matInput placeholder="Phone No." formControlName="phone" required>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.phone.hasError('required')">
+            Please enter phone number. eg. 0123456789
+          </mat-error>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.phone.hasError('pattern')">
+            Phone invalid. Please follow example (0123456789).
+          </mat-error>
+        <mat-icon matPrefix>call</mat-icon>
+      </mat-form-field>
+
+      <!-- Staff ID -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Staff ID</mat-label>
+        <input type="text" matInput placeholder="Staff ID" formControlName="staffid" required>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.staffid.hasError('required')">
+            Please enter a staff id.
+          </mat-error>
+        <mat-icon matPrefix>badge</mat-icon>
+      </mat-form-field>
+
+      <!-- Position -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Position</mat-label>
+        <input type="text" matInput placeholder="Position" formControlName="position" required>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.password.hasError('required')">
+            Please enter a position.
+          </mat-error>
+        <mat-icon matPrefix>person_search</mat-icon>
+      </mat-form-field>
+
+
+
       <button mat-raised-button color="primary" type="submit">Register</button>
     </form>
   </div>

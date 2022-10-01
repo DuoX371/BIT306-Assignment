@@ -1,0 +1,45 @@
+<h1>Register School</h1>
+<div class="card mat-elevation-z3">
+  <div class="card-body row">
+    <div class="col-sm-6">
+      <form [formGroup]="registerSchool" (ngSubmit)="onSubmit()">
+        <p class="card-text" *ngIf="adminSchool === undefined">Register a school</p>
+        <p class="card-text" *ngIf="adminSchool !== undefined">View you school details</p>
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>School Name</mat-label>
+          <input type="text" matInput placeholder="School Name" formControlName="name" required *ngIf="adminSchool === undefined">
+          <input type="text" matInput placeholder="School Name" required *ngIf="adminSchool !== undefined" [value]="adminSchool.name" readonly>
+          <mat-error *ngIf="registerSchool.controls.name.hasError('required')">
+            Please enter a username.
+          </mat-error>
+          <mat-icon matPrefix>school</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Address</mat-label>
+          <input type="text" matInput placeholder="Address" formControlName="address" required *ngIf="adminSchool === undefined">
+          <input type="text" matInput placeholder="Address" required *ngIf="adminSchool !== undefined" [value]="adminSchool.address" readonly>
+          <mat-error *ngIf="registerSchool.controls.address.hasError('required')">
+            Please enter a username.
+          </mat-error>
+          <mat-icon matPrefix>my_location</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>City</mat-label>
+          <input type="text" matInput placeholder="City" formControlName="city" required *ngIf="adminSchool === undefined">
+          <input type="text" matInput placeholder="City" required *ngIf="adminSchool !== undefined" [value]="adminSchool.city" readonly>
+          <mat-error *ngIf="registerSchool.controls.city.hasError('required')">
+            Please enter a username.
+          </mat-error>
+          <mat-icon matPrefix>location_city</mat-icon>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" *ngIf="adminSchool === undefined">Register</button>
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <img src="https://i.pinimg.com/originals/b1/8d/ed/b18deddaac8a534da0aae85b704cc391.jpg" height="300px">
+    </div>
+  </div>
+</div>

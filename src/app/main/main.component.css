@@ -49,3 +49,7 @@ mat-action-list button mat-icon{
 .container {
   padding-top: 20px;
 }
+
+.mat-container {
+  background-color: #EBEDEF;;
+}

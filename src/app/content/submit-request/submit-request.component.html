@@ -1,0 +1,95 @@
+<h1>Submit Request</h1>
+<div class="card mat-elevation-z3">
+  <div class="card-body row">
+    <form [formGroup]="submitRequestForm" (ngSubmit)="onSubmit()" class="col-sm-6">
+      <p class="card-text">Submit a request for assitance from the general public</p>
+
+      <!-- description -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Description</mat-label>
+        <input type="text" matInput placeholder="Description" formControlName="description" required>
+        <mat-error *ngIf="submitRequestForm.controls.description.hasError('required')">
+          Please enter a username.
+        </mat-error>
+        <mat-icon matPrefix>info</mat-icon>
+      </mat-form-field>
+
+      <!-- date -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Date</mat-label>
+        <input type="date" matInput placeholder="Date" formControlName="date" required>
+          <mat-error *ngIf="submitRequestForm.controls.date.hasError('required')">
+            Please select a date.
+          </mat-error>
+          <mat-error *ngIf="submitRequestForm.controls.date.hasError('pattern')">
+            Please enter a valid date.
+          </mat-error>
+        <mat-icon matPrefix>calendar_month</mat-icon>
+      </mat-form-field>
+
+      <!-- time -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Time</mat-label>
+        <input type="time" matInput placeholder="Time" formControlName="time" required>
+        <mat-error *ngIf="submitRequestForm.controls.time.hasError('required')">
+          Please select a time.
+        </mat-error>
+        <mat-error *ngIf="submitRequestForm.controls.time.hasError('pattern')">
+          Please enter a valid time.
+        </mat-error>
+        <mat-icon matPrefix>schedule</mat-icon>
+      </mat-form-field>
+
+      <!-- student level -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Student Level</mat-label>
+        <input type="text" matInput placeholder="Student Level" formControlName="studentLevel" required>
+          <mat-error *ngIf="submitRequestForm.controls.studentLevel.hasError('required')">
+            Please enter a name.
+          </mat-error>
+          <mat-error *ngIf="submitRequestForm.controls.studentLevel.hasError('pattern')">
+            Please enter a valid number.
+          </mat-error>
+        <mat-icon matPrefix>grade</mat-icon>
+      </mat-form-field>
+
+      <!-- Expected number of students -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Expect Number of Student</mat-label>
+        <input type="number" matInput placeholder="Expected Number of Students" formControlName="expectedStudents" required>
+          <mat-error *ngIf="submitRequestForm.controls.expectedStudents.hasError('required')">
+            Please enter a number.
+          </mat-error>
+          <mat-error *ngIf="submitRequestForm.controls.expectedStudents.hasError('pattern')">
+            Please enter a valid number.
+          </mat-error>
+        <mat-icon matPrefix>group</mat-icon>
+      </mat-form-field>
+
+
+
+      <button mat-raised-button color="primary" type="submit">Register</button>
+    </form>
+    <div class="col-sm-6 text-center ">
+      <img src="../../../assets/images/pfp.png" alt="submit-request" class="img-fluid pt-4" style="max-width: 30%">
+      <h2 class="pt-1">{{ currentUser.fullname }}</h2>
+      <h2>{{ currentUser.position }}</h2>
+      <div class="card mat-elevation-z2">
+        <div class="card-body">
+          <h3 class="card-title fw-bold">School Information</h3>
+          <table class="table ms-auto me-auto w-50">
+            <tr>
+              <td class="text-end">ID: </td>
+              <td>{{ userSchool.id }}</td>
+            </tr>
+            <tr>
+              <td class="text-end">Address: </td>
+              <td>{{ userSchool.name }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
