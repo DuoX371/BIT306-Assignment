@@ -1,0 +1,40 @@
+<h1>Register School Admin</h1>
+<div class="card mat-elevation-z3">
+  <div class="card-body w-50">
+    <form [formGroup]="registerSchoolAdminForm" (ngSubmit)="onSubmit()">
+      <p class="card-text">Create a School admin account</p>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input type="text" matInput placeholder="Username" formControlName="username" required>
+        <mat-error *ngIf="registerSchoolAdminForm.controls.username.hasError('required')">
+          Please enter a username.
+        </mat-error>
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="Password" formControlName="password" required>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.password.hasError('required')">
+            Please enter a password.
+          </mat-error>
+          <mat-error *ngIf="registerSchoolAdminForm.controls.password.hasError('minlength')">
+            Password must be at least {{passMinLength}} characters long.
+          </mat-error>
+        <mat-icon matPrefix>lock</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Re-enter Password</mat-label>
+        <input type="password" matInput placeholder="Re-enter Password" formControlName="confirmPassword" required>
+        <mat-error *ngIf="registerSchoolAdminForm.controls.confirmPassword.hasError('required')">
+          Please re-enter password.
+        </mat-error>
+        <mat-icon matPrefix>lock</mat-icon>
+      </mat-form-field>
+      <mat-error *ngIf="registerSchoolAdminForm.hasError('passwordMismatch')" class="error-adjust">
+        Password does not match.
+      </mat-error>
+      <button mat-raised-button color="primary" type="submit">Register</button>
+    </form>
+  </div>
+</div>

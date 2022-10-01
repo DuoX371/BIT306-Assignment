@@ -8,17 +8,12 @@
     <div class="sidenav-content">
       <!-- Temp -->
       {{currentUser?.type ? currentUser.type : 'not logged in'}}
-      <!--
-        HELP Admin - Registers School and School Admins
-        School Admin - Submit Request and review offers
-       -->
 
        <!-- Admin -->
       <div *ngIf="currentUser?.type == 'admin'">
         <div class="sidenav-split">Admin</div>
         <mat-action-list>
-          <button mat-list-item routerLinkActive="active" routerLink="/"><mat-icon>home</mat-icon>Register School</button>
-          <button mat-list-item routerLinkActive="active" routerLink="/test"><mat-icon>dashboard</mat-icon>Register School Admin</button>
+          <button mat-list-item routerLinkActive="active" routerLink="/register-school-admin"><mat-icon>add_circle</mat-icon>Register School Admin</button>
         </mat-action-list>
       </div>
 

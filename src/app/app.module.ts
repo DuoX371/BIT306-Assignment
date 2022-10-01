@@ -14,6 +14,7 @@ import { TestComponent } from './content/test/test.component';
 import { HomeComponent } from './content/home/home.component';
 import { LoginComponent } from './content/login/login.component';
 import { RegisterVolunteerComponent } from './content/register-volunteer/register-volunteer.component';
+import { RegisterSchoolAdminComponent } from './content/register-school-admin/register-school-admin.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RegisterVolunteerComponent } from './content/register-volunteer/registe
     TestComponent,
     HomeComponent,
     LoginComponent,
-    RegisterVolunteerComponent
+    RegisterVolunteerComponent,
+    RegisterSchoolAdminComponent
   ],
   imports: [
     BrowserModule,

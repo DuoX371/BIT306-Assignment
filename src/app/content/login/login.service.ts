@@ -7,7 +7,7 @@ export class LoginService {
 
   private users = [
     {username: 'admin', password: 'admin', type: 'admin'},
-    {username: 'user', password: 'user', type: 'volunteer'},
+    {username:"user", password:"user", fullname:"User1", email:"user@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"2022-09-07", type:"volunteer"},
     {username: 'sadmin', password: 'sadmin', type: 'sadmin'},
   ]
 
@@ -27,7 +27,6 @@ export class LoginService {
   }
 
   login(data: any | object){
-
     const user = this.users.find(u =>  u.username === data.username && u.password === data.password)
     if(user === undefined) return null
     this.setCurrentUser(user);
@@ -36,7 +35,14 @@ export class LoginService {
 
   registerVolunteer(data: any | object){
     data['type'] = 'volunteer';
-    if(this.users.find(u => u.username === data['username']) !== undefined) return false;
+    if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
+    this.users.push(data);
+    return true;
+  }
+
+  registerSchoolAdmin(data: any | object){
+    data['type'] = 'sadmin';
+    if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
     this.users.push(data);
     return true;
   }
