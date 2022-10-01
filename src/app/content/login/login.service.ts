@@ -33,6 +33,15 @@ export class LoginService {
     return user;
   }
 
+  registerVolunteer(username: any, password: any, fullname: any, email: any, phone:any, occupation:any, dateofbirth:any, userType:any){
+    const user = this.users.push(username,password,fullname,email,phone,occupation,dateofbirth,userType)
+    // console.log(username,password,fullname,email,phone,occupation,dateofbirth,userType)
+
+    if(user === undefined) return null
+
+    return user;
+  }
+
   logout(){
     localStorage.removeItem('currentUser');
     this.currentUser = null;

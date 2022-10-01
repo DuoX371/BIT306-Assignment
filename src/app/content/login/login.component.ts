@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterVolunteerComponent } from '../register-volunteer/register-volunteer.component';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   passMinLength = 4;
-  constructor(public loginService: LoginService, public router: Router) { }
+  constructor(public loginService: LoginService, public router: Router, public registerPop: MatDialog) { }
 
   loginForm = new FormGroup({
     username: new FormControl<string>('', Validators.required),
@@ -41,6 +43,10 @@ export class LoginComponent implements OnInit {
       //redirect to home page
       this.router.navigate(['']);
     }
+  }
+
+  onRegister(){
+    this.registerPop.open(RegisterVolunteerComponent)
   }
 
   ngOnInit(): void {

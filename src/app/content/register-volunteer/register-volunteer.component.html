@@ -1,0 +1,86 @@
+<div class="container">
+    <h1>Register</h1>
+    <p class="text-secondary">Register as Volunteer</p>
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput placeholder="Username" formControlName="username" required>
+          <mat-error *ngIf="registerForm.controls.username.hasError('required')">
+            Please enter a username.
+          </mat-error>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline" >
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input type="password" matInput [minlength]="passMinLength" formControlName="password" required>
+            <mat-error *ngIf="registerForm.controls.password.hasError('required')">
+              Please enter a password.
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">
+              Password must be at least {{passMinLength}} characters long.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input type="text" matInput placeholder="Fullname" formControlName="fullname" required>
+            <mat-error *ngIf="registerForm.controls.fullname.hasError('required')">
+              Please enter full name.
+            </mat-error>
+            <mat-icon matPrefix>person_outline</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="Email" formControlName="email" required ngModel email="true">
+            <mat-error *ngIf="registerForm.controls.email.hasError('required')">
+              Please enter email.
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.email.hasError('email')">
+                Invalid format. eg. user@xmail.com
+            </mat-error>
+            <mat-icon matPrefix>alternate_email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input type="tel" matInput placeholder="Phone (0123456789)" formControlName="phone" required [pattern]="phoneFormat">
+            <mat-error *ngIf="registerForm.controls.phone.hasError('required')">
+              Please enter phone number. eg. 0123456789
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.phone.hasError('pattern')">
+                Phone invalid. Please follow example (0123456789)
+              </mat-error>
+            <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Occupation</mat-label>
+            <input type="text" matInput placeholder="Occupation" formControlName="occupation" required>
+            <mat-error *ngIf="registerForm.controls.occupation.hasError('required')">
+              Please enter a username.
+            </mat-error>
+            <mat-icon matPrefix>settings</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+
+          <mat-label>Date of Birth</mat-label>
+          <input type="date" matInput [min]="minDate" [max]="maxDate" placeholder="Date of Birth" formControlName="dateofbirth" required onkeydown="return false">
+          <mat-error *ngIf="registerForm.controls.dateofbirth.hasError('required')">
+            Please enter Date of Birth.
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls.dateofbirth.hasError('[min]')">
+            Invalid Date
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls.dateofbirth.hasError('[max]')">
+            Invalid Date
+          </mat-error>
+          <mat-icon matPrefix>date_range</mat-icon>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Register</button>
+      </form>
+  </div>
