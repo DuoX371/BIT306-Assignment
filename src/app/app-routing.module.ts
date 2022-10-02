@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './content/home/home.component';
+// import { HomeComponent } from './content/home/home.component';
 import { LoginComponent } from './content/login/login.component';
 import { MainComponent } from './main/main.component';
 import { RegisterSchoolAdminComponent } from './content/register-school-admin/register-school-admin.component';
 import { RegisterSchoolComponent } from './content/register-school/register-school.component';
 import { SubmitRequestComponent } from './content/submit-request/submit-request.component';
 import { ReviewOffersComponent } from './content/review-offers/review-offers.component';
-import { RegisterVolunteerComponent } from './content/register-volunteer/register-volunteer.component';
+// import { RegisterVolunteerComponent } from './content/register-volunteer/register-volunteer.component';
 import { ViewRequestComponent } from './content/view-request/view-request.component';
 
 // Auth Guard

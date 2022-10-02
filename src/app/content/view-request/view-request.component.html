@@ -1,19 +1,37 @@
 <h1>View Request</h1>
 <p>Select a to view a request</p>
-<button mat-raised-button color="primary" (click)="!showFilter">Filter</button>
-<div class="card container mat-elevation-z1 mt-2" *ngIf="showFilter">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-sm-2">
-        a
+<div class="btn-group mb-5">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+    Filter
+  </button>
+  <div class="dropdown-menu container" aria-labelledby="dropdownMenuClickableInside" style="padding-left:1em; width: 70vw; font-size: 14px;">
+    <div class="row d-flex justify-content-start">
+      <div class="col-sm-3">
+        <!-- Filter by School -->
+        <mat-form-field appearance="outline">
+          <mat-label>Select School</mat-label>
+          <mat-select (selectionChange)="applySchoolFilter($event)">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let school of schoolList" [value]="school">{{school}}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div class="col-sm-2">
-        v
+      <div class="col-sm-3">
+        <!-- Filter by City -->
+        <mat-form-field appearance="outline">
+          <mat-label>Select City</mat-label>
+          <mat-select (selectionChange)="applyCityFilter($event)">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let city of cityList" [value]="city">{{city}}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div class="col-sm-2">
-        a
+      <div class="col-sm-3">
+        <!-- Start Date -->
+        b
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-3">
+        <!-- End Date -->
         a
       </div>
     </div>
@@ -21,7 +39,7 @@
 </div>
 <br>
 
-<table mat-table [dataSource]="requests" class="w-100 mat-elevation-z8 text-center">
+<table mat-table [dataSource]="dataSource" class="w-100 mat-elevation-z8 text-center">
   <!-- Define headers -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <!-- Define the datas -->

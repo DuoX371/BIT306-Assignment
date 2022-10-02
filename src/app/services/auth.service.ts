@@ -13,6 +13,8 @@ export class AuthService {
     {id: 5, username: "xd", password:"user", fullname: "XD", email:"usadsaer@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"2012-09-07", type:"volunteer"},
     {id: 6, username: "luluser", password:"user", fullname: "LUL USer", email:"usdsadsaer@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"1980-09-07", type:"volunteer"},
     {id: 7, username: "jiaddd", password:"user", fullname: "Jiadd", email:"zzzz@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"2001-09-07", type:"volunteer"},
+    {id: 8, username: "sadmin2", password:"sadmin2", confirmPassword:"sadmin2", fullname:"School Admin 2", email:"sadmin2@a.a", phone:"0122309882", staffid:"S02", position: "Noober Manager", type:"sadmin", schoolId: 2},
+    {id: 9, username: "leadmin", password:"leadmin", confirmPassword:"leadmin", fullname:"School Admin 3", email:"leadmin@a.a", phone:"0122309882", staffid:"S03", position: "Lol Manager", type:"sadmin", schoolId: 3},
   ]
 
   private currentUser = null;

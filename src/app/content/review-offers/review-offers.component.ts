@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { OfferService } from 'src/app/services/offer.service';
 import { RequestService } from 'src/app/services/request.service';
+import { SchoolService } from 'src/app/services/school.service';
 import { ReviewOffersModelComponent } from './review-offers-model/review-offers-model.component';
 
 @Component({
@@ -13,9 +15,12 @@ export class ReviewOffersComponent implements OnInit {
   requests = this.requestService.getSelfRequest();
   displayedColumns: string[] = ['id', 'description', 'date', 'studentLevel', 'expectedStudents', 'status', 'requestDate', 'offers'];
 
-  constructor(public requestService: RequestService, public reviewOfferModel: MatDialog, public offerService: OfferService) { }
+  constructor(public requestService: RequestService, public reviewOfferModel: MatDialog, public offerService: OfferService, public schoolService: SchoolService, public router: Router) { }
 
   ngOnInit(): void {
+    if(this.schoolService.getSadminSchool() == undefined){
+      this.router.navigate(['/register-school'], {queryParams: {noSchool: true}});
+    }
     this.requests = this.requests.map(r => {
       // add number of offers to each request
       r['offers'] = this.offerService.getOfferByRequestId(r.id).length;

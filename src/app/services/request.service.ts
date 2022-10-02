@@ -8,16 +8,15 @@ import { SchoolService } from './school.service';
 })
 export class RequestService {
   private requests = [
-    {id: 1, description: 'Help in Business', date: '2022-10-28', time: '8:50', studentLevel: 'Diploma', expectedStudents: 20, status: 'NEW', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
-    {id: 2, description: 'Help in Water', date: '2022-11-18', time: '12:50', studentLevel: 'Diploma', expectedStudents: 30, status: 'NEW', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
-    {id: 3, description: 'Help in Fire', date: '2022-1-1', time: '21:50', studentLevel: 'Diploma', expectedStudents: 40, status: 'NEW', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
-    {id: 4, description: 'Help in Hot', date: '2022-12-03', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'NEW', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
-    {id: 5, description: 'Help in Air', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'CLOSED', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
-    {id: 6, description: 'Help in Mizu', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'CLOSED', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
-    {id: 7, description: 'Help in Hono', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'NEW', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
+    {id: 1, description: 'Help in Business', date: '2022-10-28', time: '8:50', studentLevel: 'Diploma', expectedStudents: 20, status: 'NEW', sadminId: 3, requestDate: '2022-10-3'},
+    {id: 2, description: 'Help in Water', date: '2022-11-18', time: '12:50', studentLevel: 'Diploma', expectedStudents: 30, status: 'NEW', sadminId: 8, requestDate: '2022-3-12'},
+    {id: 3, description: 'Help in Fire', date: '2022-1-1', time: '21:50', studentLevel: 'Diploma', expectedStudents: 40, status: 'NEW', sadminId: 9, requestDate: '2022-4-9'},
+    {id: 4, description: 'Help in Hot', date: '2022-12-03', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'NEW', sadminId: 3, requestDate: '2022-11-1'},
+    {id: 5, description: 'Help in Air', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'CLOSED', sadminId: 3, requestDate: '2022-12-22'},
+    {id: 6, description: 'Help in Mizu', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'CLOSED', sadminId: 8, requestDate: '2022-1-23'},
+    {id: 7, description: 'Help in Hono', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'NEW', sadminId: 8, requestDate: '2022-10-10'},
   ]
   constructor(public schoolService: SchoolService, public authService: AuthService) { }
-
 
   addRequest(data: object | any){
     let request = {

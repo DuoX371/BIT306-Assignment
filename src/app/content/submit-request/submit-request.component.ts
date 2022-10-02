@@ -53,8 +53,7 @@ export class SubmitRequestComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.schoolService.getSadminSchool() == undefined){
-      this.router.navigate(['/register-school']);
-      return;
+      this.router.navigate(['/register-school'], {queryParams: {noSchool: true}});
     }
     this.submitRequestForm.get('date').setValue(this.minDate);
   }

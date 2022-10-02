@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SchoolService } from '../../services/school.service';
 
@@ -12,7 +12,7 @@ import { SchoolService } from '../../services/school.service';
 export class RegisterSchoolComponent implements OnInit {
   adminSchool = this.schoolService.getSadminSchool();
 
-  constructor(private schoolService: SchoolService, private router: Router) { }
+  constructor(private schoolService: SchoolService, private router: Router, private route: ActivatedRoute) { }
 
   registerSchool = new FormGroup({
     name: new FormControl<string>('', Validators.required),
@@ -39,7 +39,16 @@ export class RegisterSchoolComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    if(this.route.snapshot.queryParamMap.get('noSchool')){
+      Swal.fire({
+        icon: 'error',
+        title: 'Please register a school to continue',
+        showConfirmButton: false,
+        position: 'top-end',
+        timer: 2000,
+        heightAuto: false //must set heigh auto
+      })
+    }
   }
 
 }
