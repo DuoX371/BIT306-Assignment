@@ -38,4 +38,12 @@ export class RequestService {
     let request = this.requests.find(request => request.id === requestId);
     return this.schoolService.getSchoolBySAdminId(request.sadminId);
   }
+
+  closeRequest(requestId: number){
+    let user = this.authService.getCurrentUser();
+    let request = this.requests.find(request => request.id === requestId && request.sadminId === user.id);
+    if(request === undefined) return false;
+    request.status = 'CLOSED';
+    return true;
+  }
 }

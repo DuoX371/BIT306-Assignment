@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OfferService } from 'src/app/services/offer.service';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-review-offers-model',
@@ -15,7 +16,7 @@ export class ReviewOffersModelComponent implements OnInit {
   // {id: 9, remarks: 'xdxdxdx', status: 'PENDING', requestId: 1, volunId: 2},
   displayedColumns: string[] = ['id', 'remarks', 'status', 'volunteer', 'age', 'occupation'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public offerService: OfferService, public authService: AuthService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public offerService: OfferService, public authService: AuthService, public requestService: RequestService) { }
 
   ngOnInit(): void {
     this.dataInput = this.data;
@@ -46,6 +47,43 @@ export class ReviewOffersModelComponent implements OnInit {
     }).then((result) => {
       if(!result.isConfirmed) return
       this.offerService.approveOffer(data.id);
+    })
+  }
+
+  closeRequest(){
+    Swal.mixin({
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Close!',
+      heightAuto: false,
+      confirmButtonColor: 'green',
+    }).fire({
+      title: 'Are you sure?',
+      text: `Close request Request ID: ${this.dataInput.id}?`,
+    }).then((result) => {
+      if(!result.isConfirmed) return
+      if(this.requestService.closeRequest(this.dataInput.id)){
+        Swal.mixin({
+          icon: 'success',
+          showCancelButton: false,
+          showConfirmButton: false,
+          heightAuto: false,
+          timer: 3000,
+        }).fire({
+          title: 'Request closed successfully!',
+        })
+      }else{
+        Swal.mixin({
+          icon: 'error',
+          showCancelButton: false,
+          showConfirmButton: false,
+          heightAuto: false,
+          timer: 3000,
+        }).fire({
+          title: 'Error closing request!',
+        })
+      }
+
     })
   }
 
