@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { OfferService } from 'src/app/services/offer.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth.service';
 
@@ -12,27 +13,34 @@ import { AuthService } from '../../../services/auth.service';
 export class ViewRequestModelComponent implements OnInit {
   dataInput : any;
   currentUser = this.authService.getCurrentUser();
+  offerValidity : any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private router: Router, private viewRequestModel: MatDialog) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private router: Router, private viewRequestModel: MatDialog, private offerService: OfferService) { }
 
   ngOnInit(): void {
     this.dataInput = this.data;
-    console.log(this.dataInput);
+    this.offerValidity = this.offerService.checkOfferValid(this.dataInput.id);
   }
 
   submitOffer(){
     if(!this.currentUser) return this.notLoggedIn();
-    console.log(this.currentUser)
+
     Swal.mixin({
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Submit Offer',
       heightAuto: false,
+      input: 'textarea',
+      inputPlaceholder: 'Enter your remarks here',
     }).fire({
       title: 'Are you sure you want to submit offer?',
       text: 'You will not be able to change your offer after submission.',
     }).then((result) => {
       if(!result.isConfirmed) return;
+      //add offers
+      const remarks = result.value;
+      this.offerService.addOffer(this.dataInput.id, remarks);
+
       Swal.mixin({
         icon: 'success',
         showCancelButton: false,

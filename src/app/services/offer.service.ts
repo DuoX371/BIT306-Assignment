@@ -26,4 +26,23 @@ export class OfferService {
     let offer = this.offers.find(offer => offer.id === offerId);
     offer.status = 'APPROVED';
   }
+
+  addOffer(requestId: string, remarks: string){
+    const user = this.authService.getCurrentUser();
+    let offer = {
+      id: this.offers.length + 1,
+      remarks: remarks,
+      status: 'PENDING',
+      requestId: parseInt(requestId),
+      volunId: user.id
+    }
+    this.offers.push(offer);
+  }
+
+  checkOfferValid(requestId: number){
+    const user = this.authService.getCurrentUser();
+    let offer = this.offers.find(offer => offer.volunId === user.id && offer.requestId === requestId);
+    console.log(offer)
+    return offer === undefined;
+  }
 }
