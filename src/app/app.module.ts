@@ -18,6 +18,8 @@ import { RegisterSchoolAdminComponent } from './content/register-school-admin/re
 import { SubmitRequestComponent } from './content/submit-request/submit-request.component';
 import { RegisterSchoolComponent } from './content/register-school/register-school.component';
 import { ReviewOffersComponent } from './content/review-offers/review-offers.component';
+import { ViewRequestComponent } from './content/view-request/view-request.component';
+import { ViewRequestDetailComponent } from './content/view-request/view-request-detail/view-request-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ReviewOffersComponent } from './content/review-offers/review-offers.com
     RegisterSchoolAdminComponent,
     SubmitRequestComponent,
     RegisterSchoolComponent,
-    ReviewOffersComponent
+    ReviewOffersComponent,
+    ViewRequestComponent,
+    ViewRequestDetailComponent,
   ],
   imports: [
     BrowserModule,

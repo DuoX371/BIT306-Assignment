@@ -8,12 +8,16 @@ import { RegisterSchoolAdminComponent } from './content/register-school-admin/re
 import { RegisterSchoolComponent } from './content/register-school/register-school.component';
 import { SubmitRequestComponent } from './content/submit-request/submit-request.component';
 import { ReviewOffersComponent } from './content/review-offers/review-offers.component';
+import { RegisterVolunteerComponent } from './content/register-volunteer/register-volunteer.component';
+import { ViewRequestComponent } from './content/view-request/view-request.component';
+
 
 
 // Auth Guard
 import { AdminGuard } from './authGuard/admin.guard';
 import { SchoolAdminGuard } from './authGuard/school-admin.guard';
 import { VolunteerGuard } from './authGuard/volunteer.guard';
+
 
 
 const routes: Routes = [
@@ -26,6 +30,8 @@ const routes: Routes = [
     {path: 'register-school', component: RegisterSchoolComponent, canActivate: [SchoolAdminGuard]},
     {path: 'submit-request', component: SubmitRequestComponent, canActivate: [SchoolAdminGuard]},
     {path: 'review-offers', component: ReviewOffersComponent, canActivate: [SchoolAdminGuard]},
+    //Volunteer Page
+    {path: 'viewRequest', component: ViewRequestComponent, data: {title: 'Request'}},
     {path: 'test', component: TestComponent},
   ]},
   {path: '**', redirectTo: ''},
