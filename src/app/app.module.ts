@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './include/header/header.component';
 import { MainComponent } from './main/main.component';
-import { TestComponent } from './content/test/test.component';
 import { HomeComponent } from './content/home/home.component';
 import { LoginComponent } from './content/login/login.component';
 import { RegisterVolunteerComponent } from './content/register-volunteer/register-volunteer.component';
@@ -20,13 +19,13 @@ import { RegisterSchoolComponent } from './content/register-school/register-scho
 import { ReviewOffersComponent } from './content/review-offers/review-offers.component';
 import { ViewRequestComponent } from './content/view-request/view-request.component';
 import { ViewRequestDetailComponent } from './content/view-request/view-request-detail/view-request-detail.component';
+import { ReviewOffersModelComponent } from './content/review-offers/review-offers-model/review-offers-model.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainComponent,
-    TestComponent,
     HomeComponent,
     LoginComponent,
     RegisterVolunteerComponent,
@@ -36,6 +35,7 @@ import { ViewRequestDetailComponent } from './content/view-request/view-request-
     ReviewOffersComponent,
     ViewRequestComponent,
     ViewRequestDetailComponent,
+    ReviewOffersModelComponent
   ],
   imports: [
     BrowserModule,

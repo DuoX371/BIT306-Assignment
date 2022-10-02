@@ -6,19 +6,20 @@ import { LoginService } from '../content/login/login.service';
 })
 export class SchoolService {
   private schools = [
-    {id: 1, name: 'Genshin Impact School', address: 'Taman Bunga Tanjung', city: 'Kuala Lumpur', admin: 'sadmin'}
+    {id: 1, name: 'Genshin Impact School', address: 'Taman Bunga Tanjung', city: 'Kuala Lumpur', sadminId: 3}
   ]
 
   constructor(private loginService: LoginService) { }
 
   getSadminSchool(){
     const user = this.loginService.getCurrentUser();
-    return this.schools.find(e => {return e.admin === user.username})
+    return this.schools.find(e => {return e.sadminId === user.id})
   }
 
   registerSchool(data: object | any){
-    data['admin'] = this.loginService.getCurrentUser().username
+    data['sadminId'] = this.loginService.getCurrentUser().id
     data['id'] = this.schools.length + 1
+    this.loginService.updateSchoolId(data.id)
     this.schools.push(data)
   }
 }

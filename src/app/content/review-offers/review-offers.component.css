@@ -1,0 +1,6 @@
+.mat-row:hover .mat-cell {
+  background-color: rgb(233, 233, 233);
+}
+th.mat-header-cell {
+  text-align: center !important;
+}

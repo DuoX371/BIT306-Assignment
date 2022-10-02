@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './content/home/home.component';
 import { LoginComponent } from './content/login/login.component';
 import { MainComponent } from './main/main.component';
-import { TestComponent } from './content/test/test.component';
 import { RegisterSchoolAdminComponent } from './content/register-school-admin/register-school-admin.component';
 import { RegisterSchoolComponent } from './content/register-school/register-school.component';
 import { SubmitRequestComponent } from './content/submit-request/submit-request.component';
@@ -30,9 +29,12 @@ const routes: Routes = [
     {path: 'register-school', component: RegisterSchoolComponent, canActivate: [SchoolAdminGuard]},
     {path: 'submit-request', component: SubmitRequestComponent, canActivate: [SchoolAdminGuard]},
     {path: 'review-offers', component: ReviewOffersComponent, canActivate: [SchoolAdminGuard]},
+<<<<<<< HEAD
     //Volunteer Page
     {path: 'viewRequest', component: ViewRequestComponent, data: {title: 'Request'}},
     {path: 'test', component: TestComponent},
+=======
+>>>>>>> b89812a0f143a6932c94ba350a3bf1533196774b
   ]},
   {path: '**', redirectTo: ''},
 ];
