@@ -23,6 +23,10 @@ export class RegisterSchoolComponent implements OnInit {
   onSubmit(){
     if(!this.registerSchool.valid) return;
     this.schoolService.registerSchool(this.registerSchool.value);
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
 
     Swal.fire({
       icon: 'success',
@@ -32,10 +36,8 @@ export class RegisterSchoolComponent implements OnInit {
       timer: 3000,
       heightAuto: false //must set heigh auto
     })
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([currentUrl]);
-  });
+
+
   }
 
   ngOnInit(): void {

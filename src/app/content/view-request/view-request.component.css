@@ -7,10 +7,9 @@ th.mat-header-cell {
 mat-menu-panel {
   max-width: none !important;
 }
-::ng-deep .mat-form-field-wrapper{
+/* .my-form-field .mat-form-field-wrapper {
   margin-bottom: -1.25em !important;
-}
-
+} */
 .dropdown-custom {
   font-size: 12px;
   padding-left: 2em;
