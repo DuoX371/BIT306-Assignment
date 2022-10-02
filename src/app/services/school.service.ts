@@ -22,4 +22,8 @@ export class SchoolService {
     this.loginService.updateSchoolId(data.id)
     this.schools.push(data)
   }
+
+  getSchoolBySAdminId(SAdminId: number){
+    return this.schools.find(s => s.sadminId === SAdminId);
+  }
 }
