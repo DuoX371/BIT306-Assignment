@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../content/login/login.service';
+import { LoginService } from '../content/login/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class SchoolService {
   registerSchool(data: object | any){
     data['sadminId'] = this.loginService.getCurrentUser().id
     data['id'] = this.schools.length + 1
-    this.loginService.updateSchoolId(data.id)
+    this.loginService.getCurrentUser()['school'] = data.id
     this.schools.push(data)
   }
 

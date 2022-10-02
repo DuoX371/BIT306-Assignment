@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../login/auth.service';
 
 @Component({
   selector: 'app-register-school-admin',

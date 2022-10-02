@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../content/login/login.service';
+import { LoginService } from '../content/login/auth.service';
 import { SchoolService } from './school.service';
 
 
@@ -31,6 +31,7 @@ export class RequestService {
   }
 
   getAllRequest(){return this.requests;}
+  getAllNewRequest(){return this.requests.filter(request => request.status === 'NEW');}
 
   getSelfRequest(){return this.requests.filter(request => request.sadminId === this.loginService.getCurrentUser().id);}
 

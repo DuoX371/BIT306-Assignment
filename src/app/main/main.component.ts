@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LoginService } from '../content/login/login.service';
+import { LoginService } from '../content/login/auth.service';
 import { MainService } from './main.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';

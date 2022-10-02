@@ -10,8 +10,6 @@ import { ReviewOffersComponent } from './content/review-offers/review-offers.com
 import { RegisterVolunteerComponent } from './content/register-volunteer/register-volunteer.component';
 import { ViewRequestComponent } from './content/view-request/view-request.component';
 
-
-
 // Auth Guard
 import { AdminGuard } from './authGuard/admin.guard';
 import { SchoolAdminGuard } from './authGuard/school-admin.guard';
@@ -19,22 +17,19 @@ import { VolunteerGuard } from './authGuard/volunteer.guard';
 
 
 
+
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: MainComponent, children: [
-    {path: '', component: HomeComponent},
+    {path: '', component: ViewRequestComponent},
     // Admin Pages
     {path: 'register-school-admin', component: RegisterSchoolAdminComponent, canActivate: [AdminGuard]},
     // School Admin Pages
     {path: 'register-school', component: RegisterSchoolComponent, canActivate: [SchoolAdminGuard]},
     {path: 'submit-request', component: SubmitRequestComponent, canActivate: [SchoolAdminGuard]},
     {path: 'review-offers', component: ReviewOffersComponent, canActivate: [SchoolAdminGuard]},
-<<<<<<< HEAD
     //Volunteer Page
-    {path: 'viewRequest', component: ViewRequestComponent, data: {title: 'Request'}},
-    {path: 'test', component: TestComponent},
-=======
->>>>>>> b89812a0f143a6932c94ba350a3bf1533196774b
+    {path: 'view-request', component: ViewRequestComponent},
   ]},
   {path: '**', redirectTo: ''},
 ];

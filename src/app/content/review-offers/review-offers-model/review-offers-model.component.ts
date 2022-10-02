@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OfferService } from 'src/app/services/offer.service';
-import { LoginService } from '../../login/login.service';
+import { LoginService } from '../../login/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({

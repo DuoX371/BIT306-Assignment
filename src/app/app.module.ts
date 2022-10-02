@@ -18,8 +18,8 @@ import { SubmitRequestComponent } from './content/submit-request/submit-request.
 import { RegisterSchoolComponent } from './content/register-school/register-school.component';
 import { ReviewOffersComponent } from './content/review-offers/review-offers.component';
 import { ViewRequestComponent } from './content/view-request/view-request.component';
-import { ViewRequestDetailComponent } from './content/view-request/view-request-detail/view-request-detail.component';
 import { ReviewOffersModelComponent } from './content/review-offers/review-offers-model/review-offers-model.component';
+import { ViewRequestModelComponent } from './content/view-request/view-request-model/view-request-model.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,8 @@ import { ReviewOffersModelComponent } from './content/review-offers/review-offer
     RegisterSchoolComponent,
     ReviewOffersComponent,
     ViewRequestComponent,
-    ViewRequestDetailComponent,
-    ReviewOffersModelComponent
+    ReviewOffersModelComponent,
+    ViewRequestModelComponent
   ],
   imports: [
     BrowserModule,

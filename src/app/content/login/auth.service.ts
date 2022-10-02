@@ -52,14 +52,10 @@ export class LoginService {
   registerSchoolAdmin(data: any | object){
     data['type'] = 'sadmin';
     data['id'] = this.users.length + 1;
-    data['schoolId'] = null;
+    // data['schoolId'] = null;
     if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
     this.users.push(data);
     return true;
-  }
-
-  updateSchoolId(id: number){
-    this.users.find(u => u.id === this.currentUser.id).schoolId = id;
   }
 
   logout(){

@@ -66,10 +66,44 @@
         <mat-icon matPrefix>group</mat-icon>
       </mat-form-field>
 
+      <mat-checkbox class="mb-2" (click)="updateCheck()">Add Resource</mat-checkbox>
+      <div *ngIf="checked">
+        <!-- Description of resource -->
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Description of Resource</mat-label>
+          <input type="text" matInput placeholder="Description of Resource" formControlName="rDescription" required>
+            <mat-error *ngIf="submitRequestForm.controls.rDescription.hasError('required')">
+              Please enter a description.
+            </mat-error>
+          <mat-icon matPrefix>group</mat-icon>
+        </mat-form-field>
 
+        <!-- Resource Type -->
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Resorce Type</mat-label>
+          <mat-select formControlName="rType">
+            <mat-option value="mb">Mobile Device</mat-option>
+            <mat-option value="pc">Personal Computer</mat-option>
+            <mat-option value="ne">Networking Equipment</mat-option>
+          </mat-select>
+          <mat-icon matPrefix>group</mat-icon>
+        </mat-form-field>
 
+        <!-- Number of resource required -->
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Amount Required</mat-label>
+          <input type="number" matInput placeholder="Expected Number of Students" formControlName="rQuantity" required>
+            <mat-error *ngIf="submitRequestForm.controls.rQuantity.hasError('required')">
+              Please enter a number.
+            </mat-error>
+          <mat-icon matPrefix>group</mat-icon>
+        </mat-form-field>
+      </div>
+      <br *ngIf="!checked">
       <button mat-raised-button color="primary" type="submit">Register</button>
     </form>
+
+    <!-- Right side -->
     <div class="col-sm-6 text-center ">
       <img src="../../../assets/images/pfp.png" alt="submit-request" class="img-fluid pt-4" style="max-width: 30%">
       <h2 class="pt-1">{{ currentUser.fullname }}</h2>

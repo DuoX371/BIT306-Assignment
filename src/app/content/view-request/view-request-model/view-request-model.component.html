@@ -1,0 +1,54 @@
+<div class="text-center">
+  <h1>Info</h1>
+  <h3>{{ dataInput.school }}</h3>
+  <h5>{{ dataInput.description }}</h5>
+</div>
+<div class="card mat-elevation-z8 container text-center">
+  <table class="table">
+    <tr>
+      <td>Date</td>
+      <td>{{ dataInput.date }}</td>
+    </tr>
+    <tr>
+      <td>Time</td>
+      <td>{{ dataInput.time }}</td>
+    </tr>
+    <tr>
+      <td>Student Level</td>
+      <td>{{ dataInput.studentLevel }}</td>
+    </tr>
+    <tr>
+      <td>Expected No. of Students</td>
+      <td>{{ dataInput.expectedStudents }}</td>
+    </tr>
+    <tr>
+      <td>Resource Type</td>
+      <td>{{ dataInput.rType }}</td>
+    </tr>
+    <tr>
+      <td>Required Number</td>
+      <td>{{ dataInput.rQuantity }}</td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="dataInput.rDescription">
+  <h1 class="text-center mt-4">Resource Required</h1>
+  <div class="card mat-elevation-z8 container text-center">
+    <table class="table">
+      <tr>
+        <td>Resource Type</td>
+        <td>{{ dataInput.rType }}</td>
+      </tr>
+      <tr>
+        <td>Required Number</td>
+        <td>{{ dataInput.rQuantity }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <button mat-raised-button color="primary" type="button" (click)="submitOffer()">Submit Offer</button>
+</div>
+

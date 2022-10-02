@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../login/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
