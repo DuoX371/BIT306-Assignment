@@ -14,6 +14,7 @@ import { RequestService } from '../../services/request.service';
 export class SubmitRequestComponent implements OnInit {
   currentUser = this.loginService.getCurrentUser();
   userSchool = this.schoolService.getSadminSchool();
+  minDate = new Date().toISOString().split('T')[0];
   constructor(public loginService: LoginService, public schoolService: SchoolService, public requestService: RequestService) { }
 
   submitRequestForm = new FormGroup({

@@ -17,7 +17,7 @@
       <!-- date -->
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Date</mat-label>
-        <input type="date" matInput placeholder="Date" formControlName="date" required>
+        <input type="date" matInput placeholder="Date" [min]="minDate" formControlName="date" required>
           <mat-error *ngIf="submitRequestForm.controls.date.hasError('required')">
             Please select a date.
           </mat-error>

@@ -21,4 +21,9 @@ export class OfferService {
   getOfferByRequestId(requestId: number){
     return this.offers.filter(offer => offer.requestId === requestId);
   }
+
+  approveOffer(offerId: number){
+    let offer = this.offers.find(offer => offer.id === offerId);
+    offer.status = 'APPROVED';
+  }
 }

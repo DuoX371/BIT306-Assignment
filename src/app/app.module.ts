@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './include/header/header.component';
 import { MainComponent } from './main/main.component';
-import { TestComponent } from './content/test/test.component';
 import { HomeComponent } from './content/home/home.component';
 import { LoginComponent } from './content/login/login.component';
 import { RegisterVolunteerComponent } from './content/register-volunteer/register-volunteer.component';
@@ -18,20 +17,21 @@ import { RegisterSchoolAdminComponent } from './content/register-school-admin/re
 import { SubmitRequestComponent } from './content/submit-request/submit-request.component';
 import { RegisterSchoolComponent } from './content/register-school/register-school.component';
 import { ReviewOffersComponent } from './content/review-offers/review-offers.component';
+import { ReviewOffersModelComponent } from './content/review-offers/review-offers-model/review-offers-model.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainComponent,
-    TestComponent,
     HomeComponent,
     LoginComponent,
     RegisterVolunteerComponent,
     RegisterSchoolAdminComponent,
     SubmitRequestComponent,
     RegisterSchoolComponent,
-    ReviewOffersComponent
+    ReviewOffersComponent,
+    ReviewOffersModelComponent
   ],
   imports: [
     BrowserModule,
