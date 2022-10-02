@@ -8,7 +8,11 @@ export class LoginService {
   private users = [
     {id: 1, username: 'admin', password: 'admin', type: 'admin'},
     {id: 2, username: "user", password:"user", fullname: "User1", email:"user@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"2022-09-07", type:"volunteer"},
-    {id: 3, username: "sadmin", password:"sadmin", confirmPassword:"sadmin", fullname:"School Admin 1", email:"sadmin@a.a", phone:"0122309882", staffid:"S01", position: "Manager", type:"sadmin"}
+    {id: 3, username: "sadmin", password:"sadmin", confirmPassword:"sadmin", fullname:"School Admin 1", email:"sadmin@a.a", phone:"0122309882", staffid:"S01", position: "Manager", type:"sadmin", schoolId: 1},
+    {id: 4, username: "jhjh", password:"user", fullname: "JH JH", email:"xd@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"1990-09-07", type:"volunteer"},
+    {id: 5, username: "xd", password:"user", fullname: "XD", email:"usadsaer@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"2012-09-07", type:"volunteer"},
+    {id: 6, username: "luluser", password:"user", fullname: "LUL USer", email:"usdsadsaer@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"1980-09-07", type:"volunteer"},
+    {id: 7, username: "jiaddd", password:"user", fullname: "Jiadd", email:"zzzz@u.u", phone:"0122309882", occupation:"Doctor", dateofbirth:"2001-09-07", type:"volunteer"},
   ]
 
   private currentUser = null;
@@ -19,6 +23,10 @@ export class LoginService {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.currentUser =  JSON.stringify(this.currentUser) === '{}' ? null : this.currentUser;
     return this.currentUser;
+  }
+
+  getUserById(id: number){
+    return this.users.find(u => u.id === id);
   }
 
   setCurrentUser(user: any){
