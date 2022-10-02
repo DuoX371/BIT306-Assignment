@@ -17,8 +17,9 @@ export class SchoolService {
   }
 
   registerSchool(data: object | any){
-    data['admin'] = this.loginService.getCurrentUser().username
+    data['sadminId'] = this.loginService.getCurrentUser().id
     data['id'] = this.schools.length + 1
+    this.loginService.updateSchoolId(data.id)
     this.schools.push(data)
   }
 }
