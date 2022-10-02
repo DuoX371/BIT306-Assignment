@@ -64,6 +64,4 @@ export class ViewRequestModelComponent implements OnInit {
       this.viewRequestModel.closeAll();
     })
   }
-
-
 }

@@ -4,37 +4,51 @@
   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
     Filter
   </button>
-  <div class="dropdown-menu container" aria-labelledby="dropdownMenuClickableInside" style="padding-left:1em; width: 70vw; font-size: 14px;">
-    <div class="row d-flex justify-content-start">
-      <div class="col-sm-3">
+  <div class="dropdown-menu container dropdown-custom" aria-labelledby="dropdownMenuClickableInside">
+    <div class="row">
+      <div class="p-2 col-lg-3">
         <!-- Filter by School -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Select School</mat-label>
-          <mat-select (selectionChange)="applySchoolFilter($event)">
+          <mat-select (selectionChange)="applySchoolFilter($event)" [(ngModel)]="schoolFilter">
             <mat-option>--</mat-option>
             <mat-option *ngFor="let school of schoolList" [value]="school">{{school}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-sm-3">
+      <div class="p-2 col-lg-3">
         <!-- Filter by City -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Select City</mat-label>
-          <mat-select (selectionChange)="applyCityFilter($event)">
+          <mat-select (selectionChange)="applyCityFilter($event)" [(ngModel)]="cityFilter">
             <mat-option>--</mat-option>
             <mat-option *ngFor="let city of cityList" [value]="city">{{city}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-sm-3">
+      <div class="p-2 col-lg-3">
         <!-- Start Date -->
-        b
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Select an end date</mat-label>
+          <input matInput [matDatepicker]="startPicker" readonly (dateChange)="applyStartFilter($event)" [(ngModel)]="startFilter">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
       </div>
-      <div class="col-sm-3">
+      <div class="p-2 col-lg-3">
         <!-- End Date -->
-        a
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Select an end date</mat-label>
+          <input matInput [matDatepicker]="endPicker" readonly (dateChange)="applyEndFilter($event)" [(ngModel)]="endFilter">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <button mat-raised-button color="accent" (click)="resetFilters()">Reset</button>
       </div>
     </div>
+
   </div>
 </div>
 <br>

@@ -19,8 +19,16 @@ export class ViewRequestComponent implements OnInit {
   // filter
   globalFilter = {
     school: '',
-    city: ''
+    city: '',
+    startDate: '',
+    endDate: ''
   };
+
+  // filter variables
+  schoolFilter : string;
+  cityFilter : string;
+  startFilter : string;
+  endFilter : string;
 
   constructor(private requestService: RequestService, private viewRequestModel: MatDialog) { }
 
@@ -59,11 +67,43 @@ export class ViewRequestComponent implements OnInit {
     this.dataSource.filter = this.globalFilter;
   }
 
+  applyStartFilter(event: any){
+    const filterValue = event.value.toISOString().split('T')[0];
+    console.log(filterValue);
+
+    this.globalFilter.startDate = filterValue === undefined ? '' : filterValue.toLowerCase().trim();
+    this.dataSource.filter = this.globalFilter;
+  }
+
+  applyEndFilter(event: any){
+    const filterValue = event.value.toISOString().split('T')[0];
+    this.globalFilter.endDate = filterValue === undefined ? '' : filterValue.toLowerCase().trim();
+    this.dataSource.filter = this.globalFilter;
+  }
+
   customFilterPredicate(){
     return (data: any, filter: object | any) => {
       return data.school.toLowerCase().trim().indexOf(filter.school) !== -1 &&
-       data.city.toLowerCase().trim().indexOf(filter.city) !== -1;
+       data.city.toLowerCase().trim().indexOf(filter.city) !== -1 &&
+       this.filterDate(filter.startDate, filter.endDate, data);
     }
   }
 
+  // Filter date
+  filterDate(startDate: string, endDate: string, data: any){
+    if(startDate === '' && endDate === '') return true;
+    if(startDate === '' && endDate !== '') return new Date(data.requestDate) <= new Date(endDate);
+    if(startDate !== '' && endDate === '') return new Date(data.requestDate) >= new Date(startDate);
+    if(startDate !== '' && endDate !== '') return new Date(data.requestDate) >= new Date(startDate) && new Date(data.requestDate) <= new Date(endDate);
+    return true;
+  }
+
+  resetFilters(){
+    this.globalFilter = {school: '',city: '',startDate: '',endDate: ''};
+    this.dataSource.filter = this.globalFilter;
+    this.schoolFilter = '';
+    this.cityFilter = '';
+    this.startFilter = '';
+    this.endFilter = '';
+  }
 }

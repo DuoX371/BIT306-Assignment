@@ -7,3 +7,38 @@ th.mat-header-cell {
 mat-menu-panel {
   max-width: none !important;
 }
+::ng-deep .mat-form-field-wrapper{
+  margin-bottom: -1.25em !important;
+}
+
+.dropdown-custom {
+  font-size: 12px;
+  padding-left: 2em;
+  width: 55vw;
+}
+@media only screen and (max-width: 1500px) {
+  .dropdown-custom {
+    width: 75vw;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .dropdown-custom {
+    width: 120vw;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .dropdown-custom {
+    width: 40vw;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .dropdown-custom {
+    width: 50vw;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .dropdown-custom {
+    width: 60vw;
+  }
+}
