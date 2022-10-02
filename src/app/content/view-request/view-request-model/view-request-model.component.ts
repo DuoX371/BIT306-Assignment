@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { LoginService } from '../../login/auth.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-view-request-model',
@@ -11,9 +11,9 @@ import { LoginService } from '../../login/auth.service';
 })
 export class ViewRequestModelComponent implements OnInit {
   dataInput : any;
-  currentUser = this.loginService.getCurrentUser();
+  currentUser = this.authService.getCurrentUser();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private loginService: LoginService, private router: Router, private viewRequestModel: MatDialog) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private router: Router, private viewRequestModel: MatDialog) { }
 
   ngOnInit(): void {
     this.dataInput = this.data;

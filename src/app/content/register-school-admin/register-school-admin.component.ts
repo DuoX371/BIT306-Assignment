@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { LoginService } from '../login/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register-school-admin',
@@ -11,7 +11,7 @@ import { LoginService } from '../login/auth.service';
 export class RegisterSchoolAdminComponent implements OnInit {
   passMinLength = 4;
   phoneFormat = '[0-9]{10}';
-  constructor(public loginService: LoginService) { }
+  constructor(public authService: AuthService) { }
 
   registerSchoolAdminForm = new FormGroup({
     username: new FormControl<string>('', Validators.required),
@@ -39,7 +39,7 @@ export class RegisterSchoolAdminComponent implements OnInit {
   onSubmit(){
     const form = this.registerSchoolAdminForm;
     if(!form.valid) return;
-    const res = this.loginService.registerSchoolAdmin(form.value);
+    const res = this.authService.registerSchoolAdmin(form.value);
     if(res){
       Swal.fire({
         icon: 'success',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../content/login/auth.service';
+import { AuthService } from './auth.service';
 import { SchoolService } from './school.service';
 
 
@@ -16,7 +16,7 @@ export class RequestService {
     {id: 6, description: 'Help in Mizu', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'CLOSED', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
     {id: 7, description: 'Help in Hono', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'NEW', sadminId: 3, requestDate: new Date().toISOString().split('T')[0]},
   ]
-  constructor(public schoolService: SchoolService, public loginService: LoginService) { }
+  constructor(public schoolService: SchoolService, public authService: AuthService) { }
 
 
   addRequest(data: object | any){
@@ -24,7 +24,7 @@ export class RequestService {
       ...data,
       id: this.requests.length + 1,
       status: 'NEW',
-      sadminId: this.loginService.getCurrentUser().id,
+      sadminId: this.authService.getCurrentUser().id,
       requestDate: new Date().toISOString().split('T')[0]
     }
     this.requests.push(request)
@@ -33,7 +33,7 @@ export class RequestService {
   getAllRequest(){return this.requests;}
   getAllNewRequest(){return this.requests.filter(request => request.status === 'NEW');}
 
-  getSelfRequest(){return this.requests.filter(request => request.sadminId === this.loginService.getCurrentUser().id);}
+  getSelfRequest(){return this.requests.filter(request => request.sadminId === this.authService.getCurrentUser().id);}
 
   getSchoolByRequestID(requestId: number){
     let request = this.requests.find(request => request.id === requestId);

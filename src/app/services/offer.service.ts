@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../content/login/auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class OfferService {
     {id: 8, remarks: 'lololo', status: 'PENDING', requestId: 1, volunId: 6},
     {id: 9, remarks: 'xdxdxdx', status: 'PENDING', requestId: 1, volunId: 7},
   ]
-  constructor(public loginService: LoginService) { }
+  constructor(public authService: AuthService) { }
 
   getOfferByRequestId(requestId: number){
     return this.offers.filter(offer => offer.requestId === requestId);

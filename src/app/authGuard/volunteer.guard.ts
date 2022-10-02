@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from '../content/login/auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class VolunteerGuard implements CanActivate, CanActivateChild, CanDeactiv
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return this.loginService.getCurrentUser().type === 'volunteer' ? true : this.router.navigate(['/']);
+      return this.authService.getCurrentUser().type === 'volunteer' ? true : this.router.navigate(['/']);
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
@@ -30,5 +30,5 @@ export class VolunteerGuard implements CanActivate, CanActivateChild, CanDeactiv
     return true;
   }
 
-  constructor(public loginService: LoginService, public router: Router) { }
+  constructor(public authService: AuthService, public router: Router) { }
 }

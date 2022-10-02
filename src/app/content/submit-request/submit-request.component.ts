@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { LoginService } from '../login/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { SchoolService } from '../../services/school.service';
 import { RequestService } from '../../services/request.service';
 
@@ -13,10 +13,10 @@ import { RequestService } from '../../services/request.service';
 })
 export class SubmitRequestComponent implements OnInit {
   checked = false;
-  currentUser = this.loginService.getCurrentUser();
+  currentUser = this.authService.getCurrentUser();
   userSchool = this.schoolService.getSadminSchool();
   minDate = new Date().toISOString().split('T')[0];
-  constructor(public loginService: LoginService, public schoolService: SchoolService, public requestService: RequestService, public router: Router) { }
+  constructor(public authService: AuthService, public schoolService: SchoolService, public requestService: RequestService, public router: Router) { }
 
   submitRequestForm = new FormGroup({
     description: new FormControl<string>('', Validators.required),

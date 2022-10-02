@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { LoginService } from '../login/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -15,7 +15,7 @@ export class RegisterVolunteerComponent implements OnInit {
   phoneFormat = '[0-9]{10}';
   minDate = "1922-01-01"
   maxDate = new Date(new Date()).toISOString().substring(0, 10);
-  constructor(public loginService: LoginService, public router: Router, public registerPop: MatDialog) {}
+  constructor(public authService: AuthService, public router: Router, public registerPop: MatDialog) {}
 
 
   registerForm = new FormGroup({
@@ -30,7 +30,7 @@ export class RegisterVolunteerComponent implements OnInit {
 
   onRegister(){
     if(!this.registerForm.valid) return;
-    const res = this.loginService.registerVolunteer(this.registerForm.value);
+    const res = this.authService.registerVolunteer(this.registerForm.value);
     if(res){
       Swal.fire({
         icon: 'success',

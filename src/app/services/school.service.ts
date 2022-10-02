@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../content/login/auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +9,17 @@ export class SchoolService {
     {id: 1, name: 'Genshin Impact School', address: 'Taman Bunga Tanjung', city: 'Kuala Lumpur', sadminId: 3}
   ]
 
-  constructor(private loginService: LoginService) { }
+  constructor(private authService: AuthService) { }
 
   getSadminSchool(){
-    const user = this.loginService.getCurrentUser();
+    const user = this.authService.getCurrentUser();
     return this.schools.find(e => {return e.sadminId === user.id})
   }
 
   registerSchool(data: object | any){
-    data['sadminId'] = this.loginService.getCurrentUser().id
+    data['sadminId'] = this.authService.getCurrentUser().id
     data['id'] = this.schools.length + 1
-    this.loginService.getCurrentUser()['school'] = data.id
+    this.authService.getCurrentUser()['school'] = data.id
     this.schools.push(data)
   }
 

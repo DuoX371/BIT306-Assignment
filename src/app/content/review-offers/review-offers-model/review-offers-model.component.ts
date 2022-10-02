@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OfferService } from 'src/app/services/offer.service';
-import { LoginService } from '../../login/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,7 +15,7 @@ export class ReviewOffersModelComponent implements OnInit {
   // {id: 9, remarks: 'xdxdxdx', status: 'PENDING', requestId: 1, volunId: 2},
   displayedColumns: string[] = ['id', 'remarks', 'status', 'volunteer', 'age', 'occupation'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public offerService: OfferService, public loginService: LoginService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public offerService: OfferService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.dataInput = this.data;
@@ -23,7 +23,7 @@ export class ReviewOffersModelComponent implements OnInit {
     if(!this.offers) return
 
     this.offers = this.offers.map(o => {
-      const user = this.loginService.getUserById(o.volunId);
+      const user = this.authService.getUserById(o.volunId);
       // add volunteer info
       o['volunteer'] = user.fullname;
       o['age'] = new Date().getFullYear() - parseInt(user.dateofbirth.split('-')[0]) ;

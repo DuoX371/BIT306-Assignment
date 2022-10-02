@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from './auth.service';
+import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ import { RegisterVolunteerComponent } from '../register-volunteer/register-volun
 })
 export class LoginComponent implements OnInit {
   passMinLength = 4;
-  constructor(public loginService: LoginService, public router: Router, public registerPop: MatDialog) { }
+  constructor(public authService: AuthService, public router: Router, public registerPop: MatDialog) { }
 
   loginForm = new FormGroup({
     username: new FormControl<string>('', Validators.required),
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     if(!this.loginForm.valid) return;
-    const user = this.loginService.login(this.loginForm.value);
+    const user = this.authService.login(this.loginForm.value);
     if(user === null){
       Swal.fire({
         icon: 'error',
