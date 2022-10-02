@@ -14,11 +14,13 @@ export class ViewRequestModelComponent implements OnInit {
   dataInput : any;
   currentUser = this.authService.getCurrentUser();
   offerValidity : any;
+  btnToShow = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private router: Router, private viewRequestModel: MatDialog, private offerService: OfferService) { }
 
   ngOnInit(): void {
     this.dataInput = this.data;
+    if(!this.currentUser) this.btnToShow = true;
     this.offerValidity = this.offerService.checkOfferValid(this.dataInput.id);
   }
 

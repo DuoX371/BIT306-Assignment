@@ -36,8 +36,6 @@ export class RegisterSchoolComponent implements OnInit {
       timer: 3000,
       heightAuto: false //must set heigh auto
     })
-
-
   }
 
   ngOnInit(): void {
