@@ -11,18 +11,19 @@ import { ManageUserModelComponent } from './manage-user-model/manage-user-model.
 export class ManageUsersComponent implements OnInit {
   allUsers = this.authService.getAllUsers();
   dataSource = new MatTableDataSource(this.allUsers);
+  globalFilter : any = {type : ''}
   displayedColumns: string[] = ['no', 'username', 'password', 'fullname', 'email'];
 
   constructor(private authService: AuthService, private manageUserModel: MatDialog) { }
 
   ngOnInit(): void {
-
+    this.dataSource.filterPredicate = this.customFilterPredicate();
   }
+
   applyTypeFilter(event: Event | any) {
     const filterValue = event.value;
-    if(filterValue === undefined) return this.dataSource.filter = '';
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    return true;
+    this.globalFilter.type = filterValue === undefined ? '' : filterValue.trim().toLowerCase();
+    this.dataSource.filter = this.globalFilter;
   }
 
   clickedRow(data: any | object){
@@ -32,6 +33,12 @@ export class ManageUsersComponent implements OnInit {
       height: 'auto',
       position: {top: '5%'}
     })
-    // console.log(data);
+  }
+
+  //custom filter, type must match case
+  customFilterPredicate(){
+    return (data: any, filter: object | any) => {
+      return data.type.toLowerCase().trim() === filter.type;
+    }
   }
 }

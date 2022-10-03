@@ -69,8 +69,6 @@ export class ViewRequestComponent implements OnInit {
 
   applyStartFilter(event: any){
     const filterValue = event.value.toISOString().split('T')[0];
-    console.log(filterValue);
-
     this.globalFilter.startDate = filterValue === undefined ? '' : filterValue.toLowerCase().trim();
     this.dataSource.filter = this.globalFilter;
   }
