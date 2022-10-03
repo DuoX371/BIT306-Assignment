@@ -106,4 +106,5 @@ export class ViewRequestComponent implements OnInit {
     this.startFilter = '';
     this.endFilter = '';
   }
+
 }

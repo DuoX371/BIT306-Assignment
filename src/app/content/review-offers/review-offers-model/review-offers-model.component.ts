@@ -13,7 +13,6 @@ import { RequestService } from 'src/app/services/request.service';
 export class ReviewOffersModelComponent implements OnInit {
   dataInput : any;
   offers : any;
-  // {id: 9, remarks: 'xdxdxdx', status: 'PENDING', requestId: 1, volunId: 2},
   displayedColumns: string[] = ['id', 'remarks', 'status', 'volunteer', 'age', 'occupation'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public offerService: OfferService, public authService: AuthService, public requestService: RequestService) { }

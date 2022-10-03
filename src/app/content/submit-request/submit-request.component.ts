@@ -32,7 +32,6 @@ export class SubmitRequestComponent implements OnInit {
 
   onSubmit(){
     const form = this.submitRequestForm;
-    console.log(form.value);
     if(!form.valid) return;
     const res = this.requestService.addRequest(form.value);
     Swal.fire({

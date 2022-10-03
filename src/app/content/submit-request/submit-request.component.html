@@ -75,7 +75,7 @@
             <mat-error *ngIf="submitRequestForm.controls.rDescription.hasError('required')">
               Please enter a description.
             </mat-error>
-          <mat-icon matPrefix>group</mat-icon>
+          <mat-icon matPrefix>description</mat-icon>
         </mat-form-field>
 
         <!-- Resource Type -->
@@ -86,7 +86,7 @@
             <mat-option value="pc">Personal Computer</mat-option>
             <mat-option value="ne">Networking Equipment</mat-option>
           </mat-select>
-          <mat-icon matPrefix>group</mat-icon>
+          <mat-icon matPrefix>devices</mat-icon>
         </mat-form-field>
 
         <!-- Number of resource required -->
@@ -96,7 +96,7 @@
             <mat-error *ngIf="submitRequestForm.controls.rQuantity.hasError('required')">
               Please enter a number.
             </mat-error>
-          <mat-icon matPrefix>group</mat-icon>
+          <mat-icon matPrefix>dialpad</mat-icon>
         </mat-form-field>
       </div>
       <br *ngIf="!checked">

@@ -54,10 +54,13 @@ export class AuthService {
   registerSchoolAdmin(data: any | object){
     data['type'] = 'sadmin';
     data['id'] = this.users.length + 1;
-    // data['schoolId'] = null;
     if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
     this.users.push(data);
     return true;
+  }
+
+  getAllUsers(){
+    return this.users;
   }
 
   logout(){

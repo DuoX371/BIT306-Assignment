@@ -1,0 +1,98 @@
+<div class="card mat-elevation-z8 container">
+  <div class="card-body">
+    <!-- Volunteer Table -->
+    <table class="table" *ngIf="dataInput.type === 'volunteer'">
+      <tr>
+        <td>Username</td>
+        <td>{{ dataInput.username }}</td>
+      </tr>
+      <tr>
+        <td>Full Name</td>
+        <td>{{ dataInput.fullname }}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{ dataInput.email }}</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>{{ dataInput.phone }}</td>
+      </tr>
+      <tr>
+        <td>Occupation</td>
+        <td>{{ dataInput.occupation }}</td>
+      </tr>
+      <tr>
+        <td>Date of Birth</td>
+        <td>{{ dataInput.dateofbirth }}</td>
+      </tr>
+      <tr>
+        <td>User Type</td>
+        <td>{{ dataInput.type }}</td>
+      </tr>
+    </table>
+
+    <!-- School Admin table -->
+    <table class="table" *ngIf="dataInput.type === 'sadmin'">
+      <tr>
+        <td>Username</td>
+        <td>{{ dataInput.username }}</td>
+      </tr>
+      <tr>
+        <td>Full Name</td>
+        <td>{{ dataInput.fullname }}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{ dataInput.email }}</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>{{ dataInput.phone }}</td>
+      </tr>
+      <tr>
+        <td>Staff ID</td>
+        <td>{{ dataInput.staffid }}</td>
+      </tr>
+      <tr>
+        <td>User Type</td>
+        <td>{{ dataInput.type }}</td>
+      </tr>
+    </table>
+
+    <!-- Admin table -->
+    <div *ngIf="dataInput.type === 'admin'">
+      <h1>Le Admin</h1>
+      <img src="../../../../assets/images/afk2.png" class="img-fluid">
+
+    </div>
+
+  </div>
+</div>
+
+<!-- School card -->
+<div class="card mat-elevation-z8 container mt-2" *ngIf="dataInput.schoolId !== undefined">
+  <div class="card-body">
+    School Info
+    <table class="table" >
+      <tr>
+        <td>Name</td>
+        <td>{{ schoolInfo.name }}</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>{{ schoolInfo.address }}</td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td>{{ schoolInfo.city }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <button mat-raised-button color="primary">Delete User</button>
+  <button mat-raised-button color="primary" mat-dialog-close class="ms-2">Close</button>
+</div>
+

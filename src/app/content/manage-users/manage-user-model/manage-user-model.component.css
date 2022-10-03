@@ -1,0 +1,9 @@
+tr>td {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+tr > td:first-child{
+  font-weight: bold;
+  text-align: left;
+}

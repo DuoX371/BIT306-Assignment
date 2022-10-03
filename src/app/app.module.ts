@@ -20,6 +20,8 @@ import { ReviewOffersComponent } from './content/review-offers/review-offers.com
 import { ViewRequestComponent } from './content/view-request/view-request.component';
 import { ReviewOffersModelComponent } from './content/review-offers/review-offers-model/review-offers-model.component';
 import { ViewRequestModelComponent } from './content/view-request/view-request-model/view-request-model.component';
+import { ManageUsersComponent } from './content/manage-users/manage-users.component';
+import { ManageUserModelComponent } from './content/manage-users/manage-user-model/manage-user-model.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ViewRequestModelComponent } from './content/view-request/view-request-m
     ReviewOffersComponent,
     ViewRequestComponent,
     ReviewOffersModelComponent,
-    ViewRequestModelComponent
+    ViewRequestModelComponent,
+    ManageUsersComponent,
+    ManageUserModelComponent
   ],
   imports: [
     BrowserModule,
