@@ -51,5 +51,11 @@ mat-action-list button mat-icon{
 }
 
 .mat-container {
-  background-color: #EBEDEF;;
+  background-color: #EBEDEF;
+}
+.mat-container2{
+  background-image: url('/assets/images/logo3.png');
+  background-repeat: no-repeat;
+  background-position: 115% bottom;
+  background-size: 50%;
 }

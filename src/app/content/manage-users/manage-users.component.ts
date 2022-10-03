@@ -38,7 +38,7 @@ export class ManageUsersComponent implements OnInit {
   //custom filter, type must match case
   customFilterPredicate(){
     return (data: any, filter: object | any) => {
-      return data.type.toLowerCase().trim() === filter.type;
+      return data.type.toLowerCase().trim() === filter.type || filter.type === '';
     }
   }
 }
