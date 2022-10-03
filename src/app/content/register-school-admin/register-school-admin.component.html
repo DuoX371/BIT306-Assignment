@@ -1,6 +1,7 @@
-<h1>Register School Admin</h1>
-<div class="card mat-elevation-z3">
-  <div class="card-body w-50">
+<h1 class="text-center">Register School Admin</h1>
+<div class="d-flex justify-content-center">
+<div class="card mat-elevation-z3 w-50">
+  <div class="card-body">
     <form [formGroup]="registerSchoolAdminForm" (ngSubmit)="onSubmit()">
       <p class="card-text">Create a School admin account</p>
 
@@ -95,10 +96,8 @@
           </mat-error>
         <mat-icon matPrefix>person_search</mat-icon>
       </mat-form-field>
-
-
-
       <button mat-raised-button color="primary" type="submit">Register</button>
     </form>
   </div>
+</div>
 </div>
