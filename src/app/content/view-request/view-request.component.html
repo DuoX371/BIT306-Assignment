@@ -57,7 +57,7 @@
   <!-- Define headers -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <!-- Define the datas -->
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clickedRow(row)"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clickedRow(row)" ></tr>
   <!-- displayedColumns: string[] = ['status', 'requestDate', 'description', 'school', 'city']; -->
   <!-- ID -->
   <ng-container matColumnDef="status">

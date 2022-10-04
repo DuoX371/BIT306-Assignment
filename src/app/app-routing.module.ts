@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// import { HomeComponent } from './content/home/home.component';
 import { LoginComponent } from './content/login/login.component';
 import { MainComponent } from './main/main.component';
 import { RegisterSchoolAdminComponent } from './content/register-school-admin/register-school-admin.component';
@@ -15,14 +14,10 @@ import { AdminGuard } from './authGuard/admin.guard';
 import { SchoolAdminGuard } from './authGuard/school-admin.guard';
 import { VolunteerGuard } from './authGuard/volunteer.guard';
 
-
-
-
-
 const routes: Routes = [
   {path: 'login', component: LoginComponent, pathMatch: 'full', data: {title: 'Login'}},
   {path: '', component: MainComponent, children: [
-    {path: '', component: ViewRequestComponent},
+    {path: '', component: ViewRequestComponent, pathMatch: 'full', data: {title: 'View Request'}},
     // Admin Pages
     {path: 'register-school-admin', component: RegisterSchoolAdminComponent, canActivate: [AdminGuard], data: {title: 'Register School Admin'}},
     {path: 'manage-users', component: ManageUsersComponent, canActivate: [AdminGuard], data: {title: 'Manage Users'}},
