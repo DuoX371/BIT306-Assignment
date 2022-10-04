@@ -29,7 +29,7 @@
       <div class="p-2 col-lg-3">
         <!-- Start Date -->
         <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Select an end date</mat-label>
+          <mat-label>Select an start date</mat-label>
           <input matInput [matDatepicker]="startPicker" readonly (dateChange)="applyStartFilter($event)" [(ngModel)]="startFilter">
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>

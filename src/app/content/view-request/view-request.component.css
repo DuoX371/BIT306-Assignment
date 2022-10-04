@@ -13,7 +13,7 @@ mat-menu-panel {
 .dropdown-custom {
   font-size: 12px;
   padding-left: 2em;
-  width: 55vw;
+  width: 70vw;
 }
 @media only screen and (max-width: 1500px) {
   .dropdown-custom {
