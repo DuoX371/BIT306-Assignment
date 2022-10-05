@@ -42,7 +42,7 @@ export class ViewRequestComponent implements OnInit {
       const school = this.requestService.getSchoolByRequestID(r.id)
       r['school'] = school.name;
       r['city'] = school.city;
-      if(this.authService.getCurrentUser().type === 'volunteer'){
+      if(this.authService.getCurrentUser()?.type === 'volunteer'){
         r['offerStatus'] = this.offerSerivce.getUserOffer(r.id) === undefined ? 'no' : 'yes';
       }
       return r;
