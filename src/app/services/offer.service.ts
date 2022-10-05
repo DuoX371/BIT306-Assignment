@@ -45,4 +45,9 @@ export class OfferService {
     console.log(offer)
     return offer === undefined;
   }
+
+  getUserOffer(requestId: number){
+    const user = this.authService.getCurrentUser();
+    return this.offers.find(offer => offer.volunId === user.id && offer.requestId === requestId);
+  }
 }

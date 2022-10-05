@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'src/app/services/auth.service';
+import { OfferService } from 'src/app/services/offer.service';
 import { RequestService } from 'src/app/services/request.service';
 import { ViewRequestModelComponent } from './view-request-model/view-request-model.component';
 
@@ -21,7 +23,8 @@ export class ViewRequestComponent implements OnInit {
     school: '',
     city: '',
     startDate: '',
-    endDate: ''
+    endDate: '',
+    offered: ''
   };
 
   // filter variables
@@ -29,8 +32,9 @@ export class ViewRequestComponent implements OnInit {
   cityFilter : string;
   startFilter : string;
   endFilter : string;
+  offeredFilter: string;
 
-  constructor(private requestService: RequestService, private viewRequestModel: MatDialog) { }
+  constructor(private requestService: RequestService, private viewRequestModel: MatDialog, public authService: AuthService, public offerSerivce: OfferService) { }
 
   ngOnInit(): void {
     this.requests = this.requestService.getAllNewRequest();
@@ -38,8 +42,12 @@ export class ViewRequestComponent implements OnInit {
       const school = this.requestService.getSchoolByRequestID(r.id)
       r['school'] = school.name;
       r['city'] = school.city;
+      if(this.authService.getCurrentUser().type === 'volunteer'){
+        r['offerStatus'] = this.offerSerivce.getUserOffer(r.id) === undefined ? 'no' : 'yes';
+      }
       return r;
     })
+
     this.dataSource = new MatTableDataSource(this.requests);
     this.schoolList = [...new Set(this.requests.map(r => r.school))];
     this.cityList = [...new Set(this.requests.map(r => r.city))];
@@ -79,10 +87,19 @@ export class ViewRequestComponent implements OnInit {
     this.dataSource.filter = this.globalFilter;
   }
 
+  applyOfferFilter(event: any){
+    const filterValue = event.value;
+    this.globalFilter.offered = filterValue === undefined ? '' : filterValue.toLowerCase().trim();
+    this.dataSource.filter = this.globalFilter;
+  }
+
   customFilterPredicate(){
     return (data: any, filter: object | any) => {
+      console.log(filter);
+
       return data.school.toLowerCase().trim().indexOf(filter.school) !== -1 &&
        data.city.toLowerCase().trim().indexOf(filter.city) !== -1 &&
+       data.offerStatus.toLowerCase().trim().indexOf(filter.offered) !== -1 &&
        this.filterDate(filter.startDate, filter.endDate, data);
     }
   }
@@ -97,12 +114,13 @@ export class ViewRequestComponent implements OnInit {
   }
 
   resetFilters(){
-    this.globalFilter = {school: '',city: '',startDate: '',endDate: ''};
+    this.globalFilter = {school: '',city: '',startDate: '',endDate: '', offered: ''};
     this.dataSource.filter = this.globalFilter;
     this.schoolFilter = '';
     this.cityFilter = '';
     this.startFilter = '';
     this.endFilter = '';
+    this.offeredFilter = '';
   }
 
 }

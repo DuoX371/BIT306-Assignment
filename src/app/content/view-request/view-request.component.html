@@ -44,7 +44,19 @@
           <mat-datepicker #endPicker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div class="col-12">
+      <div class="p-2 col-3">
+        <!-- Filter by offer status -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Select Offer Status</mat-label>
+          <mat-select (selectionChange)="applyOfferFilter($event)" [(ngModel)]="offeredFilter">
+            <mat-option>--</mat-option>
+            <mat-option [value]="'yes'">Offered</mat-option>
+            <mat-option [value]="'no'">Not Offered</mat-option>
+            <!-- <mat-option *ngFor="let city of cityList" [value]="city">{{city}}</mat-option> -->
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
         <button mat-raised-button color="accent" (click)="resetFilters()">Reset</button>
       </div>
     </div>
