@@ -1,7 +1,10 @@
 <div *ngIf="!offers.length">
   <h1 *ngIf="dataInput.status !== 'CLOSED'">There are currently no offers for this request.</h1>
   <h1 *ngIf="dataInput.status === 'CLOSED'">This request is now closed.</h1>
-  <img src="../../../../assets/images/afk.png" class="img-fluid" style="max-width: 60% !important;">
+  <div class="text-center">
+    <img src="../../../../assets/images/afk.png" class="img-fluid" style="max-width: 70% !important;">
+  </div>
+
   <div class="text-center mt-4">
     <button mat-raised-button color="primary" type="button" (click)="closeRequest()" *ngIf="dataInput.status !== 'CLOSED'">Close Request</button>
     <button mat-raised-button color="primary" type="button" disabled *ngIf="dataInput.status === 'CLOSED'">Closed</button>
@@ -9,6 +12,7 @@
   </div>
 </div>
 <div *ngIf="offers.length">
+  <h1 *ngIf="dataInput.status === 'CLOSED'">This request is now closed.</h1>
   <h2>Please select an offer to approve</h2>
   <table mat-table [dataSource]="offers" class="w-100 mat-elevation-z8 text-center">
     <!-- Define headers -->

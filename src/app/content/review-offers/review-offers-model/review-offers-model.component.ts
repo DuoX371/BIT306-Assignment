@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OfferService } from 'src/app/services/offer.service';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
@@ -15,13 +15,17 @@ export class ReviewOffersModelComponent implements OnInit {
   offers : any;
   displayedColumns: string[] = ['id', 'remarks', 'status', 'volunteer', 'age', 'occupation'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public offerService: OfferService, public authService: AuthService, public requestService: RequestService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public offerService: OfferService, public authService: AuthService, public requestService: RequestService, public dialogRef: MatDialogRef<any>) { }
 
   ngOnInit(): void {
     this.dataInput = this.data;
     this.offers = this.offerService.getOfferByRequestId(this.dataInput.id)
-    if(!this.offers) return
 
+    if(!this.offers.length) {
+      console.log(this.offers);
+      console.log('No offers found');
+      this.dialogRef.updateSize('30%', 'auto');
+    }
     this.offers = this.offers.map(o => {
       const user = this.authService.getUserById(o.volunId);
       // add volunteer info

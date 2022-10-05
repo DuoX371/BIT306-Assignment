@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OfferService } from 'src/app/services/offer.service';
 import { RequestService } from 'src/app/services/request.service';
@@ -13,6 +13,7 @@ import { ReviewOffersModelComponent } from './review-offers-model/review-offers-
 })
 export class ReviewOffersComponent implements OnInit {
   requests = this.requestService.getSelfRequest();
+  dialogRef: MatDialogRef<any>;
   displayedColumns: string[] = ['id', 'description', 'date', 'studentLevel', 'expectedStudents', 'status', 'requestDate', 'offers'];
 
   constructor(public requestService: RequestService, public reviewOfferModel: MatDialog, public offerService: OfferService, public schoolService: SchoolService, public router: Router) { }
@@ -42,11 +43,15 @@ export class ReviewOffersComponent implements OnInit {
   }
 
   clickedRow(data: any | object){
-    this.reviewOfferModel.open(ReviewOffersModelComponent, {
+    this.dialogRef =  this.reviewOfferModel.open(ReviewOffersModelComponent, {
       data: data,
       width: '60%',
       height: 'auto',
       position: {top: '5%'}
     })
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.dialogRef = null;
+  });
   }
 }
