@@ -11,7 +11,7 @@
           <input type="text" matInput placeholder="School Name" formControlName="name" required *ngIf="adminSchool === undefined">
           <input type="text" matInput placeholder="School Name" required *ngIf="adminSchool !== undefined" [value]="adminSchool.name" readonly>
           <mat-error *ngIf="registerSchool.controls.name.hasError('required')">
-            Please enter a username.
+            Please enter a school name.
           </mat-error>
           <mat-icon matPrefix>school</mat-icon>
         </mat-form-field>
@@ -21,7 +21,7 @@
           <input type="text" matInput placeholder="Address" formControlName="address" required *ngIf="adminSchool === undefined">
           <input type="text" matInput placeholder="Address" required *ngIf="adminSchool !== undefined" [value]="adminSchool.address" readonly>
           <mat-error *ngIf="registerSchool.controls.address.hasError('required')">
-            Please enter a username.
+            Please enter an address.
           </mat-error>
           <mat-icon matPrefix>my_location</mat-icon>
         </mat-form-field>
@@ -31,7 +31,7 @@
           <input type="text" matInput placeholder="City" formControlName="city" required *ngIf="adminSchool === undefined">
           <input type="text" matInput placeholder="City" required *ngIf="adminSchool !== undefined" [value]="adminSchool.city" readonly>
           <mat-error *ngIf="registerSchool.controls.city.hasError('required')">
-            Please enter a username.
+            Please enter a city.
           </mat-error>
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
