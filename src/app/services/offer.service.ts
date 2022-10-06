@@ -42,7 +42,6 @@ export class OfferService {
   checkOfferValid(requestId: number){
     const user = this.authService.getCurrentUser();
     let offer = this.offers.find(offer => offer.volunId === user.id && offer.requestId === requestId);
-    console.log(offer)
     return offer === undefined;
   }
 
