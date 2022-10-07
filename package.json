@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "backend": "nodemon server.js"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,8 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@sweetalert2/ngx-sweetalert2": "^11.0.0",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.20",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.4.35",
     "tslib": "^2.3.0",

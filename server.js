@@ -7,4 +7,7 @@ const port = 3000;
 app.set('port', port);
 
 const server = http.createServer(app);
-server.listen(port);
+
+server.listen(port, () => {
+  console.log(`Backend Server listening on port ${port}`)
+})
