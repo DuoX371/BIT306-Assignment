@@ -28,9 +28,9 @@ export class RegisterVolunteerComponent implements OnInit {
     dateofbirth: new FormControl<string>('', {validators: [Validators.required]}),
   })
 
-  onRegister(){
+  async onRegister(){
     if(!this.registerForm.valid) return;
-    const res = this.authService.registerVolunteer(this.registerForm.value);
+    const res = await this.authService.registerVolunteer(this.registerForm.value);
     if(res){
       Swal.fire({
         icon: 'success',

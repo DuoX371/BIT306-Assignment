@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
     password: new FormControl<string>('', {validators: [Validators.required, Validators.minLength(this.passMinLength)]})
   })
 
-  onLogin(){
+  async onLogin(){
     if(!this.loginForm.valid) return;
-    const user = this.authService.login(this.loginForm.value);
+    const user = await this.authService.login(this.loginForm.value);
     if(user === null){
       Swal.fire({
         icon: 'error',

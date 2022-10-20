@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SchoolAdmin } from '../models/user.model';
+import { SchoolAdmin, Volunteer } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -39,20 +39,32 @@ export class AuthService {
     this.currentUser = user;
   }
 
-  login(data: any | object){
-    const user = this.users.find(u =>  u.username === data.username && u.password === data.password)
-    if(user === undefined) return null
-    this.setCurrentUser(user);
-    return user;
+  async login(data: any | object){
+    // const user = await this.http.post(`${environment.apiUrl}/api/auth/login`, data).toPromise()
+    //   .then((res) => {
+    //     return res;
+    //   })
+    //   console.log(user)
+    // return 'test';
+    // const user = this.users.find(u =>  u.username === data.username && u.password === data.password)
+    // if(user === undefined) return null
+    // this.setCurrentUser(user);
+    // return user;
   }
 
-  registerVolunteer(data: any | object){
+  async registerVolunteer(data: any | object){
     data['type'] = 'volunteer';
-    console.log(data);
-    // data['id'] = this.users.length + 1;
+    const volunteer: Volunteer = data;
+    return await this.http.post(`${environment.apiUrl}/api/auth/registerVolunteer`, volunteer).toPromise()
+      .then((res) => {
+        console.log(res);
+        return true;
+      })
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
     // if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
-    // this.users.push(data);
-    return true;
   }
 
   async registerSchoolAdmin(data: any | object){
