@@ -1,10 +1,23 @@
 const express = require('express')
-const fetch = require('node-fetch')
 const app = express()
+const bodyParser = require('body-parser')
+
+const mongoose = require('mongoose')
+
+// connect to the database
+require('./db')()
+
+app.use(bodyParser.json())
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+})
 
 app.get('/', async (req, res) => {
-  // res.status(400).send(`Hello World`)
-  res.send(`Server is up and running`)
+  res.status(200).send(`Hello World`)
 })
 
 // Import all the routes here

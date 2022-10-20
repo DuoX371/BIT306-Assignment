@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { SchoolAdmin } from '../models/user.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,7 @@ export class AuthService {
 
   private currentUser = null;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getCurrentUser(){
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -45,18 +48,25 @@ export class AuthService {
 
   registerVolunteer(data: any | object){
     data['type'] = 'volunteer';
-    data['id'] = this.users.length + 1;
-    if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
-    this.users.push(data);
+    console.log(data);
+    // data['id'] = this.users.length + 1;
+    // if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
+    // this.users.push(data);
     return true;
   }
 
-  registerSchoolAdmin(data: any | object){
+  async registerSchoolAdmin(data: any | object){
     data['type'] = 'sadmin';
-    data['id'] = this.users.length + 1;
-    if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
-    this.users.push(data);
-    return true;
+    const sadmin: SchoolAdmin = data;
+    return await this.http.post(`${environment.apiUrl}/api/auth/registerSchoolAdmin`, sadmin).toPromise()
+      .then((res) => {
+        console.log(res);
+        return true;
+      }).catch((err) => {
+        console.log(err);
+        return false;
+      })
+    // if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
   }
 
 

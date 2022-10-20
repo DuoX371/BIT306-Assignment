@@ -36,10 +36,10 @@ export class RegisterSchoolAdminComponent implements OnInit {
     }
   }
 
-  onSubmit(){
+  async onSubmit(){
     const form = this.registerSchoolAdminForm;
     if(!form.valid) return;
-    const res = this.authService.registerSchoolAdmin(form.value);
+    const res = await this.authService.registerSchoolAdmin(form.value);
     if(res){
       Swal.fire({
         icon: 'success',
