@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Request } from '../models/request.model';
 import { AuthService } from './auth.service';
 import { SchoolService } from './school.service';
 
@@ -18,15 +19,16 @@ export class RequestService {
   ]
   constructor(public schoolService: SchoolService, public authService: AuthService) { }
 
-  addRequest(data: object | any){
+  async addRequest(data: object | any){
     let request = {
       ...data,
-      id: this.requests.length + 1,
       status: 'NEW',
-      sadminId: this.authService.getCurrentUser().id,
+      sadminId: this.authService.getCurrentUser()._id,
       requestDate: new Date().toISOString().split('T')[0]
     }
-    this.requests.push(request)
+    const reqData: Request = request;
+    console.log(reqData)
+    // this.requests.push(request)
   }
 
   getAllRequest(){return this.requests;}

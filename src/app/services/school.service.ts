@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { School } from '../models/school.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -31,7 +32,8 @@ export class SchoolService {
 
   async registerSchool(data: object | any){
     data['sadminId'] = this.authService.getCurrentUser()._id;
-    return await this.http.post<{school:object | any}>(`${environment.apiUrl}/api/school/registerSchool`, data).toPromise()
+    const school: School = data;  
+    return await this.http.post<{school:object | any}>(`${environment.apiUrl}/api/school/registerSchool`, school).toPromise()
       .then((res) => {
         this.authService.updateCurrentUser(res.school._id);
         return true;

@@ -12,9 +12,11 @@ import { RequestService } from '../../services/request.service';
   styleUrls: ['./submit-request.component.css']
 })
 export class SubmitRequestComponent implements OnInit {
+  loading = false;
   checked = false;
   currentUser = this.authService.getCurrentUser();
-  userSchool = this.schoolService.getSadminSchool();
+  userSchool: any;
+
   minDate = new Date().toISOString().split('T')[0];
   constructor(public authService: AuthService, public schoolService: SchoolService, public requestService: RequestService, public router: Router) { }
 
@@ -30,10 +32,11 @@ export class SubmitRequestComponent implements OnInit {
     rQuantity: new FormControl<string>(''),
   })
 
-  onSubmit(){
+  async onSubmit(){
     const form = this.submitRequestForm;
     if(!form.valid) return;
-    const res = this.requestService.addRequest(form.value);
+    this.loading = true;
+    const res = await this.requestService.addRequest(form.value);
     Swal.fire({
       title: 'Success!',
       text: 'Request has been submitted',
@@ -50,8 +53,9 @@ export class SubmitRequestComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    if(this.schoolService.getSadminSchool() == undefined){
+  async ngOnInit(): Promise<void> {
+    this.userSchool = await this.schoolService.getSadminSchool();
+    if(this.userSchool === null){
       this.router.navigate(['/register-school'], {queryParams: {noSchool: true}});
     }
     this.submitRequestForm.get('date').setValue(this.minDate);
