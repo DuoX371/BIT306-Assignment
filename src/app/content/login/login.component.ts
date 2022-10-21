@@ -13,6 +13,7 @@ import { RegisterVolunteerComponent } from '../register-volunteer/register-volun
 })
 export class LoginComponent implements OnInit {
   passMinLength = 4;
+  loading = false;
   constructor(public authService: AuthService, public router: Router, public registerPop: MatDialog) { }
 
   loginForm = new FormGroup({
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
 
   async onLogin(){
     if(!this.loginForm.valid) return;
+    this.loading = true;
     const user = await this.authService.login(this.loginForm.value);
     if(user === null){
       Swal.fire({
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
         timer: 3000,
         heightAuto: false //must set heigh auto
       })
+      this.loading = false;
     }else{
       Swal.fire({
         icon: 'success',

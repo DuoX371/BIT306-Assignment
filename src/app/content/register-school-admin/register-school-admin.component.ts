@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register-school-admin.component.css']
 })
 export class RegisterSchoolAdminComponent implements OnInit {
+  loading = false;
   passMinLength = 4;
   phoneFormat = '[0-9]{10}';
   constructor(public authService: AuthService) { }
@@ -39,6 +40,7 @@ export class RegisterSchoolAdminComponent implements OnInit {
   async onSubmit(){
     const form = this.registerSchoolAdminForm;
     if(!form.valid) return;
+    this.loading = true;
     const res = await this.authService.registerSchoolAdmin(form.value);
     if(res){
       Swal.fire({
@@ -60,6 +62,7 @@ export class RegisterSchoolAdminComponent implements OnInit {
         timer: 3000,
         heightAuto: false //must set heigh auto
       })
+      this.loading = false;
     }
   }
 

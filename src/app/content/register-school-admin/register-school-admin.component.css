@@ -3,3 +3,9 @@
   margin-left: 1em;
   font-size: 75%;
 }
+/* spinner */
+.mat-progress-spinner {
+  display: initial;
+  margin-left: 5px;
+  padding-right: 10px;
+}

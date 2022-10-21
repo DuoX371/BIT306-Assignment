@@ -26,3 +26,9 @@
   margin: 0 auto;
 }
 
+/* spinner */
+.mat-progress-spinner {
+  display: initial;
+  margin-left: 5px;
+  padding-right: 10px;
+}

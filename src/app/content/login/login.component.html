@@ -34,7 +34,9 @@
                     </mat-error>
 
                 </mat-form-field>
-                <div class="mt-2"><button mat-raised-button color="primary" type="submit">Login</button></div>
+                <div class="mt-2">
+                  <button mat-raised-button color="primary" type="submit" [disabled]="loading">Login<mat-spinner *ngIf="loading" color="accent" diameter="18"></mat-spinner></button>
+                </div>
 
               </form>
           </div>

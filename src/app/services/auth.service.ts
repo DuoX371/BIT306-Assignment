@@ -40,16 +40,17 @@ export class AuthService {
   }
 
   async login(data: any | object){
-    // const user = await this.http.post(`${environment.apiUrl}/api/auth/login`, data).toPromise()
-    //   .then((res) => {
-    //     return res;
-    //   })
-    //   console.log(user)
-    // return 'test';
-    // const user = this.users.find(u =>  u.username === data.username && u.password === data.password)
-    // if(user === undefined) return null
-    // this.setCurrentUser(user);
-    // return user;
+    const result = await this.http.post(`${environment.apiUrl}/api/auth/login`, data).toPromise()
+      .then((res) => {
+        console.log(res);
+        return res;
+      }).catch((err) => {
+        console.log(err);
+        return null;
+      })
+    if(result === null) return null;
+    this.setCurrentUser(result.user);
+    return result.user;
   }
 
   async registerVolunteer(data: any | object){

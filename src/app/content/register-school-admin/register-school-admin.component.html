@@ -96,7 +96,7 @@
           </mat-error>
         <mat-icon matPrefix>person_search</mat-icon>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Register</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="loading">Register<mat-spinner *ngIf="loading" color="accent" diameter="18"></mat-spinner></button>
     </form>
   </div>
 </div>
