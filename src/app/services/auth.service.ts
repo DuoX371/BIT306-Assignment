@@ -32,11 +32,18 @@ export class AuthService {
 
   getUserById(id: number){
     return this.users.find(u => u.id === id);
+    // return null;
   }
 
   setCurrentUser(user: any){
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.currentUser = user;
+  }
+
+  updateCurrentUser(schoolId: string){
+    const user = this.getCurrentUser();
+    user.schoolId = schoolId;
+    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
   async login(data: any | object){
@@ -85,10 +92,12 @@ export class AuthService {
 
   getAllUsers(){
     return this.users;
+    // return null;
   }
 
   logout(){
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentSchool')
     this.currentUser = null;
   }
 }

@@ -8,8 +8,8 @@
         <p class="card-text" *ngIf="adminSchool !== undefined">View you school details</p>
         <mat-form-field class="w-100" appearance="outline">
           <mat-label>School Name</mat-label>
-          <input type="text" matInput placeholder="School Name" formControlName="name" required *ngIf="adminSchool === undefined">
-          <input type="text" matInput placeholder="School Name" required *ngIf="adminSchool !== undefined" [value]="adminSchool.name" readonly>
+          <input type="text" matInput placeholder="School Name" formControlName="name" required *ngIf="adminSchool === null">
+          <input type="text" matInput placeholder="School Name" required *ngIf="adminSchool !== null" [value]="adminSchool?.name" readonly>
           <mat-error *ngIf="registerSchool.controls.name.hasError('required')">
             Please enter a school name.
           </mat-error>
@@ -18,8 +18,8 @@
 
         <mat-form-field class="w-100" appearance="outline">
           <mat-label>Address</mat-label>
-          <input type="text" matInput placeholder="Address" formControlName="address" required *ngIf="adminSchool === undefined">
-          <input type="text" matInput placeholder="Address" required *ngIf="adminSchool !== undefined" [value]="adminSchool.address" readonly>
+          <input type="text" matInput placeholder="Address" formControlName="address" required *ngIf="adminSchool === null">
+          <input type="text" matInput placeholder="Address" required *ngIf="adminSchool !== null" [value]="adminSchool?.address" readonly>
           <mat-error *ngIf="registerSchool.controls.address.hasError('required')">
             Please enter an address.
           </mat-error>
@@ -28,15 +28,15 @@
 
         <mat-form-field class="w-100" appearance="outline">
           <mat-label>City</mat-label>
-          <input type="text" matInput placeholder="City" formControlName="city" required *ngIf="adminSchool === undefined">
-          <input type="text" matInput placeholder="City" required *ngIf="adminSchool !== undefined" [value]="adminSchool.city" readonly>
+          <input type="text" matInput placeholder="City" formControlName="city" required *ngIf="adminSchool === null">
+          <input type="text" matInput placeholder="City" required *ngIf="adminSchool !== null" [value]="adminSchool?.city" readonly>
           <mat-error *ngIf="registerSchool.controls.city.hasError('required')">
             Please enter a city.
           </mat-error>
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" *ngIf="adminSchool === undefined">Register</button>
+        <button mat-raised-button color="primary" type="submit" *ngIf="adminSchool === null" [disabled]="loading">Register<mat-spinner *ngIf="loading" color="accent" diameter="18"></mat-spinner></button>
       </form>
     </div>
     <!-- <div class="col-sm-6">

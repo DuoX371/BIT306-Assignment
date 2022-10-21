@@ -23,5 +23,6 @@ app.get('/', async (req, res) => {
 // Import all the routes here
 app.use('/api/index', require('./routes/index'))
 app.use('/api/auth', require('./routes/auth'))
+app.use('/api/school', require('./routes/school'))
 
 module.exports = app;

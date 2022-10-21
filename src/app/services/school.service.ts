@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -11,21 +13,44 @@ export class SchoolService {
     {id: 3, name: 'Cake', address: 'Taman Ultrama', city: 'Pahang', sadminId: 9}
   ]
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public http: HttpClient) { }
 
-  getSadminSchool(){
+  async getSadminSchool(){
+    if(localStorage.getItem('currentSchool') !== null) return this.getCurrentSchool();
     const user = this.authService.getCurrentUser();
-    return this.schools.find(e => {return e.sadminId === user.id})
+    if(user.schoolId === undefined) return null;
+    const school = await this.http.get<{school: object}>(`${environment.apiUrl}/api/school/getSAdminSchool?id=${user.schoolId}`).toPromise()
+      .then(res => {
+        return res.school;
+      }).catch(err => {
+        console.log(err)
+      })
+    this.setCurrentSchool(school);
+    return school;
   }
 
-  registerSchool(data: object | any){
-    data['sadminId'] = this.authService.getCurrentUser().id
-    data['id'] = this.schools.length + 1
-    this.authService.getCurrentUser()['school'] = data.id
-    this.schools.push(data)
+  async registerSchool(data: object | any){
+    data['sadminId'] = this.authService.getCurrentUser()._id;
+    return await this.http.post<{school:object | any}>(`${environment.apiUrl}/api/school/registerSchool`, data).toPromise()
+      .then((res) => {
+        this.authService.updateCurrentUser(res.school._id);
+        return true;
+      })
+      .catch((err) => {
+        console.log(err);
+        return false;
+      })
   }
 
   getSchoolBySAdminId(SAdminId: number){
     return this.schools.find(s => s.sadminId === SAdminId);
+  }
+
+  setCurrentSchool(school: any){
+    localStorage.setItem('currentSchool', JSON.stringify(school));
+  }
+
+  getCurrentSchool(){
+    return JSON.parse(localStorage.getItem('currentSchool'));
   }
 }

@@ -10,7 +10,9 @@ import { SchoolService } from '../../services/school.service';
   styleUrls: ['./register-school.component.css']
 })
 export class RegisterSchoolComponent implements OnInit {
-  adminSchool = this.schoolService.getSadminSchool();
+  // adminSchool = this.schoolService.getSadminSchool();
+  loading = false;
+  adminSchool : any;
 
   constructor(private schoolService: SchoolService, private router: Router, private route: ActivatedRoute) { }
 
@@ -20,25 +22,37 @@ export class RegisterSchoolComponent implements OnInit {
     city: new FormControl<string>('', Validators.required),
   })
 
-  onSubmit(){
+  async onSubmit(){
     if(!this.registerSchool.valid) return;
-    this.schoolService.registerSchool(this.registerSchool.value);
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([currentUrl]);
-    });
+    this.loading = true;
+    const result = await this.schoolService.registerSchool(this.registerSchool.value);
+    if(!result){
+      Swal.fire({
+        icon: 'error',
+        title: 'Register failed. School Name already exist.',
+        showConfirmButton: false,
+        timer: 3000,
+        heightAuto: false //must set heigh auto
+      })
+      this.loading = false;
+    }else {
+      const currentUrl = this.router.url;
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+      });
 
-    Swal.fire({
-      icon: 'success',
-      title: `School ${this.registerSchool.value.name} registered successfully`,
-      showConfirmButton: false,
-      position: 'top-end',
-      timer: 3000,
-      heightAuto: false //must set heigh auto
-    })
+      Swal.fire({
+        icon: 'success',
+        title: `School ${this.registerSchool.value.name} registered successfully`,
+        showConfirmButton: false,
+        position: 'top-end',
+        timer: 3000,
+        heightAuto: false //must set heigh auto
+      })
+    }
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if(this.route.snapshot.queryParamMap.get('noSchool')){
       Swal.fire({
         icon: 'error',
@@ -49,6 +63,6 @@ export class RegisterSchoolComponent implements OnInit {
         heightAuto: false //must set heigh auto
       })
     }
+    this.adminSchool = await this.schoolService.getSadminSchool();
   }
-
 }
