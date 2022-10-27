@@ -62,8 +62,8 @@ export class RegisterSchoolAdminComponent implements OnInit {
         timer: 3000,
         heightAuto: false //must set heigh auto
       })
-      this.loading = false;
     }
+    this.loading = false;
   }
 
   ngOnInit(): void {

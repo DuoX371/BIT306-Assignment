@@ -23,4 +23,13 @@ router.post('/registerSchool', async (req, res) => {
   res.status(200).send({message: 'School registered successfully', school: school})
 })
 
+router.get('/getSchoolBySAdminId', async (req, res) => {
+  const id = req.query.id;
+  if(!id) return res.status(400).send({message: 'id is required'});
+  const school = await School.findOne({sadminId: id}).catch(err => {
+    return res.status(400).send(err)
+  })
+  return res.status(200).send(school)
+})
+
 module.exports = router;

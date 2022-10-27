@@ -19,7 +19,7 @@ export class ReviewOffersModelComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataInput = this.data;
-    this.offers = this.offerService.getOfferByRequestId(this.dataInput.id)
+    this.offers = this.offerService.getOfferByRequestId(this.dataInput._id)
 
     if(!this.offers.length) {
       console.log(this.offers);
@@ -49,7 +49,7 @@ export class ReviewOffersModelComponent implements OnInit {
       text: `Approve offer by ${data.volunteer}?`,
     }).then((result) => {
       if(!result.isConfirmed) return
-      this.offerService.approveOffer(data.id);
+      this.offerService.approveOffer(data._id);
     })
   }
 
@@ -62,10 +62,10 @@ export class ReviewOffersModelComponent implements OnInit {
       confirmButtonColor: 'green',
     }).fire({
       title: 'Are you sure?',
-      text: `Close request Request ID: ${this.dataInput.id}?`,
+      text: `Close request Request ID: ${this.dataInput._id}?`,
     }).then((result) => {
       if(!result.isConfirmed) return
-      if(this.requestService.closeRequest(this.dataInput.id)){
+      if(this.requestService.closeRequest(this.dataInput._id)){
         Swal.mixin({
           icon: 'success',
           showCancelButton: false,

@@ -12,7 +12,8 @@ import { ReviewOffersModelComponent } from './review-offers-model/review-offers-
   styleUrls: ['./review-offers.component.css']
 })
 export class ReviewOffersComponent implements OnInit {
-  requests; //= this.requestService.getSelfRequest();
+  isLoading = true;
+  requests: object | any; //= this.requestService.getSelfRequest();
   dialogRef: MatDialogRef<any>;
   displayedColumns: string[] = ['id', 'description', 'date', 'studentLevel', 'expectedStudents', 'status', 'requestDate', 'offers'];
 
@@ -34,6 +35,7 @@ export class ReviewOffersComponent implements OnInit {
       if(a.status === 'CLOSED' && b.status === 'NEW') return 1;
       return 0;
     });
+    this.isLoading = false;
   }
 
   clickedRow(data: any | object){

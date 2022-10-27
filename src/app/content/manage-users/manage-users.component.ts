@@ -9,14 +9,16 @@ import { ManageUserModelComponent } from './manage-user-model/manage-user-model.
   styleUrls: ['./manage-users.component.css']
 })
 export class ManageUsersComponent implements OnInit {
-  allUsers = this.authService.getAllUsers();
-  dataSource = new MatTableDataSource(this.allUsers);
+  allUsers: any;
+  dataSource: any;
   globalFilter : any = {type : ''}
-  displayedColumns: string[] = ['no', 'username', 'password', 'fullname', 'email'];
+  displayedColumns: string[] = ['no', 'username', 'fullname', 'email'];
 
   constructor(private authService: AuthService, private manageUserModel: MatDialog) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.allUsers = await this.authService.getAllUsers()
+    this.dataSource = new MatTableDataSource(this.allUsers);;
     this.dataSource.filterPredicate = this.customFilterPredicate();
   }
 

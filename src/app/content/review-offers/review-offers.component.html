@@ -55,3 +55,4 @@
     <td mat-cell *matCellDef="let request"> {{request.offers}} </td>
   </ng-container>
 </table>
+<div class="d-flex justify-content-center" *ngIf="isLoading"><mat-spinner></mat-spinner></div>

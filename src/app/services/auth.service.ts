@@ -90,9 +90,9 @@ export class AuthService {
   }
 
 
-  getAllUsers(){
-    return this.users;
-    // return null;
+  async getAllUsers(){
+    return await this.http.get(`${environment.apiUrl}/api/auth/getAllUsers`).toPromise()
+    // return this.users;
   }
 
   logout(){

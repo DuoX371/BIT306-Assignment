@@ -12,10 +12,11 @@ export class ManageUserModelComponent implements OnInit {
   schoolInfo: any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private schoolService: SchoolService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.dataInput = this.data;
     if(this.dataInput.type !== 'sadmin') return;
     if(this.dataInput.schoolId === undefined) return;
-    this.schoolInfo = this.schoolService.getSchoolBySAdminId(this.dataInput.id);
+    this.schoolInfo = await this.schoolService.getSchoolBySAdminId(this.dataInput._id);
+    console.log(this.schoolInfo)
   }
 }

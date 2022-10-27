@@ -32,7 +32,7 @@ export class SchoolService {
 
   async registerSchool(data: object | any){
     data['sadminId'] = this.authService.getCurrentUser()._id;
-    const school: School = data;  
+    const school: School = data;
     return await this.http.post<{school:object | any}>(`${environment.apiUrl}/api/school/registerSchool`, school).toPromise()
       .then((res) => {
         this.authService.updateCurrentUser(res.school._id);
@@ -44,8 +44,9 @@ export class SchoolService {
       })
   }
 
-  getSchoolBySAdminId(SAdminId: number){
-    return this.schools.find(s => s.sadminId === SAdminId);
+  async getSchoolBySAdminId(SAdminId: number){
+    return await this.http.get(`${environment.apiUrl}/api/school/getSchoolBySAdminId?id=${SAdminId}`).toPromise();
+    // return this.schools.find(s => s.sadminId === SAdminId);
   }
 
   setCurrentSchool(school: any){
