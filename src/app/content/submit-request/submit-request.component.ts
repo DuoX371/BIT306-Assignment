@@ -37,6 +37,7 @@ export class SubmitRequestComponent implements OnInit {
     if(!form.valid) return;
     this.loading = true;
     const res = await this.requestService.addRequest(form.value);
+    if(!res) return;
     Swal.fire({
       title: 'Success!',
       text: 'Request has been submitted',
@@ -51,6 +52,7 @@ export class SubmitRequestComponent implements OnInit {
     Object.keys(form.controls).forEach(key => {
       form.get(key).setErrors(null) ;
     });
+    this.loading = false;
   }
 
   async ngOnInit(): Promise<void> {

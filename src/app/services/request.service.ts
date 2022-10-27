@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Request } from '../models/request.model';
 import { AuthService } from './auth.service';
 import { SchoolService } from './school.service';
@@ -17,7 +19,7 @@ export class RequestService {
     {id: 6, description: 'Help in .-.', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'CLOSED', sadminId: 8, requestDate: '2022-1-23'},
     {id: 7, description: 'Help in Hono', date: '2022-11-18', time: '13:50', studentLevel: 'Diploma', expectedStudents: 50, status: 'NEW', sadminId: 8, requestDate: '2022-10-10'},
   ]
-  constructor(public schoolService: SchoolService, public authService: AuthService) { }
+  constructor(public schoolService: SchoolService, public authService: AuthService, public http: HttpClient) { }
 
   async addRequest(data: object | any){
     let request = {
@@ -27,7 +29,15 @@ export class RequestService {
       requestDate: new Date().toISOString().split('T')[0]
     }
     const reqData: Request = request;
-    console.log(reqData)
+    return await this.http.post(`${environment.apiUrl}/api/request/submitRequest`, reqData).toPromise()
+      .then(res => {
+        console.log(res);
+        return true;
+      })
+      .catch(err => {
+        console.log(err);
+        return false;
+      })
     // this.requests.push(request)
   }
 
