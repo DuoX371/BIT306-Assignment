@@ -36,18 +36,8 @@ export class ViewRequestComponent implements OnInit {
 
   constructor(private requestService: RequestService, private viewRequestModel: MatDialog, public authService: AuthService, public offerSerivce: OfferService) { }
 
-  ngOnInit(): void {
-    this.requests = this.requestService.getAllNewRequest();
-    this.requests = this.requests.map(r => {
-      const school = this.requestService.getSchoolByRequestID(r.id)
-      r['school'] = school.name;
-      r['city'] = school.city;
-      if(this.authService.getCurrentUser()?.type === 'volunteer'){
-        r['offerStatus'] = this.offerSerivce.getUserOffer(r.id) === undefined ? 'no' : 'yes';
-      }
-      return r;
-    })
-
+  async ngOnInit(): Promise<void> {
+    this.requests = await this.requestService.getAllNewRequest();
     this.dataSource = new MatTableDataSource(this.requests);
     this.schoolList = [...new Set(this.requests.map(r => r.school))];
     this.cityList = [...new Set(this.requests.map(r => r.city))];

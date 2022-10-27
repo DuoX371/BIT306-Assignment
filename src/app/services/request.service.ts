@@ -38,18 +38,15 @@ export class RequestService {
         console.log(err);
         return false;
       })
-    // this.requests.push(request)
   }
 
-  getAllRequest(){return this.requests;}
-  getAllNewRequest(){return this.requests.filter(request => request.status === 'NEW');}
-
-  getSelfRequest(){return this.requests.filter(request => request.sadminId === this.authService.getCurrentUser().id);}
-
-  getSchoolByRequestID(requestId: number){
-    let request = this.requests.find(request => request.id === requestId);
-    return this.schoolService.getSchoolBySAdminId(request.sadminId);
+  // getAllRequest(){return this.requests;}
+  async getAllNewRequest(){
+    //to check if user is logged in and if the user has that offer
+    return await this.http.get(`${environment.apiUrl}/api/request/getAllNewRequests`).toPromise()
   }
+
+  async getSelfRequest(){return await this.http.get(`${environment.apiUrl}/api/request/getSelfRequest?sadminId=${this.authService.getCurrentUser()._id}`).toPromise()}
 
   closeRequest(requestId: number){
     let user = this.authService.getCurrentUser();

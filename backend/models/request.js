@@ -9,6 +9,7 @@ const requestSchema = mongoose.Schema({
   status: {type: String, required: true},
   sadminId: {type: String, required: true},
   requestDate: {type: String, required: true},
+  offers: {type: Number, required: false}
 });
 
 module.exports = mongoose.model('Request', requestSchema);

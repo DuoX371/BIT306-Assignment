@@ -12,23 +12,17 @@ import { ReviewOffersModelComponent } from './review-offers-model/review-offers-
   styleUrls: ['./review-offers.component.css']
 })
 export class ReviewOffersComponent implements OnInit {
-  requests = this.requestService.getSelfRequest();
+  requests; //= this.requestService.getSelfRequest();
   dialogRef: MatDialogRef<any>;
   displayedColumns: string[] = ['id', 'description', 'date', 'studentLevel', 'expectedStudents', 'status', 'requestDate', 'offers'];
 
   constructor(public requestService: RequestService, public reviewOfferModel: MatDialog, public offerService: OfferService, public schoolService: SchoolService, public router: Router) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if(this.schoolService.getSadminSchool() == undefined){
       this.router.navigate(['/register-school'], {queryParams: {noSchool: true}});
     }
-    this.requests = this.requests.map(r => {
-      // add number of offers to each request
-      r['offers'] = this.offerService.getOfferByRequestId(r.id).length;
-      // set time formatting
-      r.time = `${parseInt(r.time.split(':')[0]) > 12 ? parseInt(r.time.split(':')[0]) - 12 : parseInt(r.time.split(':')[0])}:${r.time.split(':')[1]} ${parseInt(r.time.split(':')[0]) >= 12 ? 'PM' : 'AM'}`;
-      return r;
-    });
+    this.requests = await this.requestService.getSelfRequest();
 
     //sort the data
     this.requests.sort((a, b) => {
