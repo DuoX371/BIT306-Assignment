@@ -46,23 +46,17 @@ router.get('/getAllNewRequests', async (req, res) => {
   ]).catch((err) => {
     return res.status(500).send(err);
   })
-  request.map((r) =>{
-    r['city'] = r.school.city
-    r['school'] = r.school.name
-  })
+  for(let i = 0; i < request.length; i++) {
+    const r = request[i];
+    r.city = r.school.city;
+    r.school = r.school.name;
+    if(req.query.userId){
+      const offer = await Offer.findOne({requestId: r._id, volunId: req.query.userId})
+      r.offerStatus = offer === null ? 'no' : 'yes';
+    }
+  }
   return res.status(200).send(request);
 });
-
- // this.requests = this.requests.map(r => {
-    //   const school = this.requestService.getSchoolByRequestID(r.id)
-    //   r['school'] = school.name;
-    //   r['city'] = school.city;
-    //   if(this.authService.getCurrentUser()?.type === 'volunteer'){
-    //     r['offerStatus'] = this.offerSerivce.getUserOffer(r.id) === undefined ? 'no' : 'yes';
-    //   }
-    //   return r;
-    // })
-
 
 router.get('/getSelfRequest', async (req, res) => {
   const request = await Request.find({sadminId: req.query.sadminId}).catch((err) => {

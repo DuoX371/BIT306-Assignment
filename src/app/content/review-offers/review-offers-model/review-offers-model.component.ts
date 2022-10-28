@@ -45,7 +45,9 @@ export class ReviewOffersModelComponent implements OnInit {
       if(!result.isConfirmed) return
       await this.offerService.approveOffer(data._id);
       //reload the data and update the table
-      this.offers = await this.offerService.getOfferByRequestId(this.dataInput._id)
+      // either direct update the front end or reload the data by fetching the api again
+      data.status = 'APPROVED';
+      // this.offers = await this.offerService.getOfferByRequestId(this.dataInput._id)
     })
   }
 

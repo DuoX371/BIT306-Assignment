@@ -43,7 +43,8 @@ export class RequestService {
   // getAllRequest(){return this.requests;}
   async getAllNewRequest(){
     //to check if user is logged in and if the user has that offer
-    return await this.http.get(`${environment.apiUrl}/api/request/getAllNewRequests`).toPromise()
+    const user = this.authService.getCurrentUser();
+    return await this.http.get(`${environment.apiUrl}/api/request/getAllNewRequests${user !== null && user?.type === 'volunteer' ? `?userId=${user._id}` : ''}`).toPromise()
   }
 
   async getSelfRequest(){return await this.http.get(`${environment.apiUrl}/api/request/getSelfRequest?sadminId=${this.authService.getCurrentUser()._id}`).toPromise()}
