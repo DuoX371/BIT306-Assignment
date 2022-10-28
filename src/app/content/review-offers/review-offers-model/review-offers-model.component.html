@@ -1,3 +1,5 @@
+<div class="d-flex justify-content-sm-center" *ngIf="loading"><mat-spinner></mat-spinner></div>
+<div *ngIf="!loading">
 <div *ngIf="!offers.length">
   <h1 *ngIf="dataInput.status !== 'CLOSED'">There are currently no offers for this request.</h1>
   <h1 *ngIf="dataInput.status === 'CLOSED'">This request is now closed.</h1>
@@ -22,7 +24,7 @@
     <!-- ID -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let offer"> {{offer.id}} </td>
+      <td mat-cell *matCellDef="let offer"> {{offer._id}} </td>
     </ng-container>
 
     <!-- Remarks -->
@@ -63,4 +65,5 @@
     <button mat-raised-button color="accent" type="button" class="ms-2" mat-dialog-close>Close</button>
   </div>
 
+</div>
 </div>

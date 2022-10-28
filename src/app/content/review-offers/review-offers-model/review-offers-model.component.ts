@@ -11,29 +11,23 @@ import { RequestService } from 'src/app/services/request.service';
   styleUrls: ['./review-offers-model.component.css']
 })
 export class ReviewOffersModelComponent implements OnInit {
+  loading = true;
   dataInput : any;
-  offers : any;
+  offers : any = [];
   displayedColumns: string[] = ['id', 'remarks', 'status', 'volunteer', 'age', 'occupation'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public offerService: OfferService, public authService: AuthService, public requestService: RequestService, public dialogRef: MatDialogRef<any>) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.dataInput = this.data;
-    this.offers = this.offerService.getOfferByRequestId(this.dataInput._id)
+    this.offers = await this.offerService.getOfferByRequestId(this.dataInput._id)
+    this.loading = false;
 
     if(!this.offers.length) {
       console.log(this.offers);
       console.log('No offers found');
       this.dialogRef.updateSize('30%', 'auto');
     }
-    this.offers = this.offers.map(o => {
-      const user = this.authService.getUserById(o.volunId);
-      // add volunteer info
-      o['volunteer'] = user.fullname;
-      o['age'] = new Date().getFullYear() - parseInt(user.dateofbirth.split('-')[0]) ;
-      o['occupation'] = user.occupation;
-      return o;
-    })
   }
 
   clickedRow(data: any | object){

@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -16,10 +18,11 @@ export class OfferService {
     {id: 8, remarks: 'lololo', status: 'PENDING', requestId: 1, volunId: 6},
     {id: 9, remarks: 'xdxdxdx', status: 'PENDING', requestId: 1, volunId: 7},
   ]
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, public http: HttpClient) { }
 
-  getOfferByRequestId(requestId: number){
-    return this.offers.filter(offer => offer.requestId === requestId);
+  async getOfferByRequestId(requestId: number){
+    // return this.offers.filter(offer => offer.requestId === requestId);
+    return await this.http.get(`${environment.apiUrl}/api/offer/getOfferByRequestId?id=${requestId}`).toPromise()
   }
 
   approveOffer(offerId: number){

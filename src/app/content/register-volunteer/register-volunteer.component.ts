@@ -31,7 +31,7 @@ export class RegisterVolunteerComponent implements OnInit {
   async onRegister(){
     if(!this.registerForm.valid) return;
     const res = await this.authService.registerVolunteer(this.registerForm.value);
-    if(res){
+    if(res.register){
       Swal.fire({
         icon: 'success',
         title: 'Register successful. Please login to continue.',
@@ -43,7 +43,7 @@ export class RegisterVolunteerComponent implements OnInit {
     }else{
       Swal.fire({
         icon: 'error',
-        title: 'Register failed. Username already exist.',
+        title: `Register failed. ${res.message}.`,
         showConfirmButton: false,
         timer: 3000,
         heightAuto: false //must set heigh auto

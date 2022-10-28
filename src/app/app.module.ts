@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,8 @@ import { ReviewOffersModelComponent } from './content/review-offers/review-offer
 import { ViewRequestModelComponent } from './content/view-request/view-request-model/view-request-model.component';
 import { ManageUsersComponent } from './content/manage-users/manage-users.component';
 import { ManageUserModelComponent } from './content/manage-users/manage-user-model/manage-user-model.component';
+
+import { AuthInterceptor } from './services/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,7 @@ import { ManageUserModelComponent } from './content/manage-users/manage-user-mod
     ReactiveFormsModule,
     SweetAlert2Module.forRoot()
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

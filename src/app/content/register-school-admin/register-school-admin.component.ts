@@ -42,7 +42,7 @@ export class RegisterSchoolAdminComponent implements OnInit {
     if(!form.valid) return;
     this.loading = true;
     const res = await this.authService.registerSchoolAdmin(form.value);
-    if(res){
+    if(res.register){
       Swal.fire({
         icon: 'success',
         title: `School Admin ${form.value.username} registered successfully`,
@@ -57,7 +57,7 @@ export class RegisterSchoolAdminComponent implements OnInit {
     }else{
       Swal.fire({
         icon: 'error',
-        title: 'Register failed. Username already exist.',
+        title: `Register failed. ${res.message}.`,
         showConfirmButton: false,
         timer: 3000,
         heightAuto: false //must set heigh auto
