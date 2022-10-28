@@ -41,9 +41,11 @@ export class ReviewOffersModelComponent implements OnInit {
     }).fire({
       title: 'Are you sure?',
       text: `Approve offer by ${data.volunteer}?`,
-    }).then((result) => {
+    }).then(async (result) => {
       if(!result.isConfirmed) return
-      this.offerService.approveOffer(data._id);
+      await this.offerService.approveOffer(data._id);
+      //reload the data and update the table
+      this.offers = await this.offerService.getOfferByRequestId(this.dataInput._id)
     })
   }
 
@@ -57,9 +59,9 @@ export class ReviewOffersModelComponent implements OnInit {
     }).fire({
       title: 'Are you sure?',
       text: `Close request Request ID: ${this.dataInput._id}?`,
-    }).then((result) => {
+    }).then(async (result) => {
       if(!result.isConfirmed) return
-      if(this.requestService.closeRequest(this.dataInput._id)){
+      if(await this.requestService.closeRequest(this.dataInput._id)){
         Swal.mixin({
           icon: 'success',
           showCancelButton: false,
@@ -69,6 +71,7 @@ export class ReviewOffersModelComponent implements OnInit {
         }).fire({
           title: 'Request closed successfully!',
         })
+        this.dataInput.status = 'CLOSED';
       }else{
         Swal.mixin({
           icon: 'error',

@@ -35,4 +35,12 @@ router.get('/getOfferByRequestId', async (req, res) => {
   return res.send(offers)
 })
 
+router.post('/approveOffer', async (req, res) => {
+  const id = req.body.id;
+  if(!id) return res.status(400).send({message: 'id is required'});
+  await Offer.findOneAndUpdate({_id: id}, {status: 'APPROVED'}, {new: true});
+  //NOTIFIY THEIR EMAIL
+  return res.status(200).send({message: 'Offer approved'});
+})
+
 module.exports = router;

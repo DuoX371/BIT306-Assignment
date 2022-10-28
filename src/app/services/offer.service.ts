@@ -25,9 +25,10 @@ export class OfferService {
     return await this.http.get(`${environment.apiUrl}/api/offer/getOfferByRequestId?id=${requestId}`).toPromise()
   }
 
-  approveOffer(offerId: number){
-    let offer = this.offers.find(offer => offer.id === offerId);
-    offer.status = 'APPROVED';
+  async approveOffer(offerId: number){
+    await this.http.post(`${environment.apiUrl}/api/offer/approveOffer`, {id: offerId}).toPromise()
+    // let offer = this.offers.find(offer => offer.id === offerId);
+    // offer.status = 'APPROVED';
   }
 
   addOffer(requestId: string, remarks: string){

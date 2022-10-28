@@ -23,6 +23,25 @@ export class ReviewOffersComponent implements OnInit {
     if(this.schoolService.getSadminSchool() == undefined){
       this.router.navigate(['/register-school'], {queryParams: {noSchool: true}});
     }
+    await this.loadTableData();
+    this.isLoading = false;
+  }
+
+  clickedRow(data: any | object){
+    this.dialogRef =  this.reviewOfferModel.open(ReviewOffersModelComponent, {
+      data: data,
+      width: '60%',
+      height: 'auto',
+      position: {top: '5%'}
+    })
+
+    this.dialogRef.afterClosed().subscribe(async result => {
+      this.dialogRef = null;
+      await this.loadTableData();
+    });
+  }
+
+  async loadTableData(){
     this.requests = await this.requestService.getSelfRequest();
 
     //sort the data
@@ -35,19 +54,5 @@ export class ReviewOffersComponent implements OnInit {
       if(a.status === 'CLOSED' && b.status === 'NEW') return 1;
       return 0;
     });
-    this.isLoading = false;
-  }
-
-  clickedRow(data: any | object){
-    this.dialogRef =  this.reviewOfferModel.open(ReviewOffersModelComponent, {
-      data: data,
-      width: '60%',
-      height: 'auto',
-      position: {top: '5%'}
-    })
-
-    this.dialogRef.afterClosed().subscribe(result => {
-      this.dialogRef = null;
-  });
   }
 }

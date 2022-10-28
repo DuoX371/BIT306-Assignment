@@ -9,7 +9,7 @@ const saltRounds = 10;
 
 router.use((req, res, next) => { next(); })
 
-router.post('/registerSchoolAdmin', async (req, res) => {
+router.post('/registerSchoolAdmin', checkAuth, async (req, res) => {
   const newSAdmin = new User(req.body);
   newSAdmin.password = await bcrypt.hash(newSAdmin.password, saltRounds)
   newSAdmin.save((err) =>{

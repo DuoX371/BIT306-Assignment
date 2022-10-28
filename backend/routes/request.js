@@ -77,5 +77,14 @@ router.get('/getSelfRequest', async (req, res) => {
   return res.status(200).send(request);
 })
 
+router.post('/closeRequest', async (req, res) => {
+  const { requestId, userId } = req.body;
+  if(!requestId) return res.status(400).send({message: 'requestId is required'});
+  if(!userId) return res.status(400).send({message: 'userId is required'});
+  const request = await Request.findOneAndUpdate({ _id: requestId, sadminId: userId }, { status: 'CLOSED' }, { new: true }).catch((err) => {
+    return res.status(500).send(err);
+  })
+  return res.status(200).send(request);
+})
 
 module.exports = router;

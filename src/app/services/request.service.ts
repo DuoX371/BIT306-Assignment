@@ -48,11 +48,12 @@ export class RequestService {
 
   async getSelfRequest(){return await this.http.get(`${environment.apiUrl}/api/request/getSelfRequest?sadminId=${this.authService.getCurrentUser()._id}`).toPromise()}
 
-  closeRequest(requestId: number){
+  async closeRequest(requestId: number){
     let user = this.authService.getCurrentUser();
-    let request = this.requests.find(request => request.id === requestId && request.sadminId === user.id);
-    if(request === undefined) return false;
-    request.status = 'CLOSED';
+    await this.http.post(`${environment.apiUrl}/api/request/closeRequest`, {requestId: requestId, userId: user}).toPromise()
+    // let request = this.requests.find(request => request.id === requestId && request.sadminId === user.id);
+    // if(request === undefined) return false;
+    // request.status = 'CLOSED';
     return true;
   }
 }
