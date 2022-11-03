@@ -24,6 +24,7 @@ import { ManageUsersComponent } from './content/manage-users/manage-users.compon
 import { ManageUserModelComponent } from './content/manage-users/manage-user-model/manage-user-model.component';
 
 import { AuthInterceptor } from './services/auth-interceptor';
+import { MyRequestComponent } from './content/my-request/my-request.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AuthInterceptor } from './services/auth-interceptor';
     ReviewOffersModelComponent,
     ViewRequestModelComponent,
     ManageUsersComponent,
-    ManageUserModelComponent
+    ManageUserModelComponent,
+    MyRequestComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ const saltRounds = 10;
 
 router.use((req, res, next) => { next(); })
 
-router.post('/registerSchoolAdmin', checkAuth, async (req, res) => {
+router.post('/registerSchoolAdmin', checkAuth('admin'), async (req, res) => {
   const newSAdmin = new User(req.body);
   newSAdmin.password = await bcrypt.hash(newSAdmin.password, saltRounds)
   newSAdmin.save((err) =>{
@@ -49,7 +49,8 @@ router.post('/login', async (req, res) => {
   return res.status(200).send({login: true, user: user, token: token})
 })
 
-router.get('/getAllUsers', checkAuth, async (req, res) => {
+//get all the users for admin page
+router.get('/getAllUsers', checkAuth('admin'), async (req, res) => {
   const users = await User.find();
   const list = JSON.parse(JSON.stringify(users));
   list.map((user) => {

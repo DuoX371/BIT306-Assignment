@@ -1,8 +1,9 @@
 const router = require('express').Router();
+const checkAuth = require('../middleware/check-auth');
 const School = require('../models/school');
 const User = require('../models/user');
 
-router.use((req, res, next) => {
+router.use(checkAuth(['admin', 'sadmin']), (req, res, next) => {
   next();
 })
 
@@ -23,6 +24,7 @@ router.post('/registerSchool', async (req, res) => {
   res.status(200).send({message: 'School registered successfully', school: school})
 })
 
+// manage users
 router.get('/getSchoolBySAdminId', async (req, res) => {
   const id = req.query.id;
   if(!id) return res.status(400).send({message: 'id is required'});

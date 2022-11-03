@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+var cors = require('cors');
 
 const mongoose = require('mongoose')
 
@@ -8,6 +9,7 @@ const mongoose = require('mongoose')
 require('./db')()
 
 app.use(bodyParser.json())
+app.use(cors());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

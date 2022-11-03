@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Offer = require('../models/offer')
+const checkAuth = require('../middleware/check-auth')
 
-router.use((req, res, next) => {
+router.use(checkAuth('sadmin'), (req, res, next) => {
   next();
 })
 

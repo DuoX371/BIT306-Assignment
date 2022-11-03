@@ -1,12 +1,14 @@
 const router = require('express').Router();
 const Request = require('../models/request');
 const Offer = require('../models/offer');
+const checkAuth = require('../middleware/check-auth');
 
 router.use((req, res, next) => {
   next();
 })
 
-router.post('/submitRequest', async (req, res) => {
+//sadmin creates a new request
+router.post('/submitRequest', checkAuth('sadmin'), async (req, res) => {
   const newRequest = new Request(req.body);
   newRequest.save().then((result) => {
     return res.status(200).send(result);
@@ -15,6 +17,7 @@ router.post('/submitRequest', async (req, res) => {
   })
 })
 
+//home page gets all new requests
 router.get('/getAllNewRequests', async (req, res) => {
   const request = await Request.aggregate([
     {
@@ -58,7 +61,8 @@ router.get('/getAllNewRequests', async (req, res) => {
   return res.status(200).send(request);
 });
 
-router.get('/getSelfRequest', async (req, res) => {
+//sadmin get self requests
+router.get('/getSelfRequest', checkAuth('sadmin'), async (req, res) => {
   const request = await Request.find({sadminId: req.query.sadminId}).catch((err) => {
     return res.status(500).send(err);
   })
@@ -71,7 +75,8 @@ router.get('/getSelfRequest', async (req, res) => {
   return res.status(200).send(request);
 })
 
-router.post('/closeRequest', async (req, res) => {
+//sadmin close the request
+router.post('/closeRequest', checkAuth('sadmin'), async (req, res) => {
   const { requestId, userId } = req.body;
   if(!requestId) return res.status(400).send({message: 'requestId is required'});
   if(!userId) return res.status(400).send({message: 'userId is required'});
