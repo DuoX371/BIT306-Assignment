@@ -1,6 +1,16 @@
 .mat-row:hover .mat-cell {
   background-color: rgb(233, 233, 233);
 }
+
+.bg-g {
+  background-color: #FFE191
+}
+
+.mat-row:hover .mat-cell.bg-g{
+  background-color: #F1C758;
+}
+
+
 th.mat-header-cell {
   text-align: center !important;
 }

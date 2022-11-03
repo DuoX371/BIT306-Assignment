@@ -8,12 +8,6 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class SchoolService {
-  private schools = [
-    {id: 1, name: 'Genshin Impact School', address: 'Taman Bunga Tanjung', city: 'Kuala Lumpur', sadminId: 3},
-    {id: 2, name: 'Monkas', address: 'Taman Superman', city: 'Pahang', sadminId: 8},
-    {id: 3, name: 'Cake', address: 'Taman Ultrama', city: 'Pahang', sadminId: 9}
-  ]
-
   constructor(private authService: AuthService, public http: HttpClient) { }
 
   async getSadminSchool(){

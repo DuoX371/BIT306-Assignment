@@ -22,9 +22,9 @@ import { ReviewOffersModelComponent } from './content/review-offers/review-offer
 import { ViewRequestModelComponent } from './content/view-request/view-request-model/view-request-model.component';
 import { ManageUsersComponent } from './content/manage-users/manage-users.component';
 import { ManageUserModelComponent } from './content/manage-users/manage-user-model/manage-user-model.component';
+import { MyOffersComponent } from './content/my-offers/my-offers.component';
 
 import { AuthInterceptor } from './services/auth-interceptor';
-import { MyRequestComponent } from './content/my-request/my-request.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { MyRequestComponent } from './content/my-request/my-request.component';
     ViewRequestModelComponent,
     ManageUsersComponent,
     ManageUserModelComponent,
-    MyRequestComponent
+    MyOffersComponent
   ],
   imports: [
     BrowserModule,

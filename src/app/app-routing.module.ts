@@ -13,6 +13,7 @@ import { ViewRequestComponent } from './content/view-request/view-request.compon
 import { AdminGuard } from './authGuard/admin.guard';
 import { SchoolAdminGuard } from './authGuard/school-admin.guard';
 import { VolunteerGuard } from './authGuard/volunteer.guard';
+import { MyOffersComponent } from './content/my-offers/my-offers.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, pathMatch: 'full', data: {title: 'Login'}},
@@ -27,6 +28,7 @@ const routes: Routes = [
     {path: 'review-offers', component: ReviewOffersComponent, canActivate: [SchoolAdminGuard], data: {title: 'Review Offers'}},
     //Volunteer Page
     {path: 'view-request', component: ViewRequestComponent, data: {title: 'View Request'}},
+    {path: 'my-offers', component: MyOffersComponent, data: {title: 'My Request'}, canActivate: [VolunteerGuard]},
   ]},
   {path: '**', redirectTo: ''},
 ];

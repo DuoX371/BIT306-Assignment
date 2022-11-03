@@ -85,8 +85,6 @@ export class ViewRequestComponent implements OnInit {
 
   customFilterPredicate(){
     return (data: any, filter: object | any) => {
-      console.log(filter);
-
       return data.school.toLowerCase().trim().indexOf(filter.school) !== -1 &&
        data.city.toLowerCase().trim().indexOf(filter.city) !== -1 &&
        data.offerStatus.toLowerCase().trim().indexOf(filter.offered) !== -1 &&

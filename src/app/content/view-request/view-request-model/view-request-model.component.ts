@@ -20,9 +20,7 @@ export class ViewRequestModelComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataInput = this.data;
-    console.log(this.dataInput);
     if(!this.currentUser) this.btnToShow = true;
-    // this.offerValidity = this.offerService.checkOfferValid(this.dataInput.id);
     this.offerValidity = this.dataInput.offerStatus === 'yes' ? false : true;
   }
 
