@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken')
 module.exports = (users) =>{
   return (req, res, next) => {
     try {
-      const token = req.headers.authorization.split(" ")[1];
+      let token = req.get('authorization')
+      if(token === undefined) throw new Error('Invalid method', 'test')
+      token = token.split(' ')[1]
       const decoded = jwt.verify(token, "some_very_long_secret_and_i_am_trying_to_make_it_even_longer");
       res.userData = decoded;
       if(users === undefined) return next();
