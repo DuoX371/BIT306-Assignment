@@ -3,8 +3,6 @@ const app = express()
 const bodyParser = require('body-parser')
 var cors = require('cors');
 
-const mongoose = require('mongoose')
-
 // connect to the database
 require('./db')()
 

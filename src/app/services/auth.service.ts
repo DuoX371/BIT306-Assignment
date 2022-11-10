@@ -63,7 +63,6 @@ export class AuthService {
         if(error.email) return {register: false, message: `Email already exist`}
         return {register: false, message: `An error has occured. Please check the logs.`}
       });
-    // if(this.users.find(u => u.username === data['username']) !== undefined) return false; //username exist
   }
 
   async registerSchoolAdmin(data: any | object){
@@ -80,10 +79,18 @@ export class AuthService {
       })
   }
 
+  async updateUserPassword(data: any | object){
+    return await this.http.put(`${environment.apiUrl}/api/auth/updateUserPassword`, data).toPromise()
+      .then((res) => {
+        return {success: true, message: ``};
+      }).catch((err) => {
+        return {success: false, message: err.error.message};
+      })
+  }
+
 
   async getAllUsers(){
     return await this.http.get(`${environment.apiUrl}/api/auth/getAllUsers`).toPromise()
-    // return this.users;
   }
 
   logout(){

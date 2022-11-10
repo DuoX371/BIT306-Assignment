@@ -20,7 +20,7 @@ export class ReviewOffersComponent implements OnInit {
   constructor(public requestService: RequestService, public reviewOfferModel: MatDialog, public offerService: OfferService, public schoolService: SchoolService, public router: Router) { }
 
   async ngOnInit(): Promise<void> {
-    if(this.schoolService.getSadminSchool() == undefined){
+    if(await this.schoolService.getSadminSchool() == null){
       this.router.navigate(['/register-school'], {queryParams: {noSchool: true}});
     }
     await this.loadTableData();

@@ -40,7 +40,6 @@ export class SchoolService {
 
   async getSchoolBySAdminId(SAdminId: number){
     return await this.http.get(`${environment.apiUrl}/api/school/getSchoolBySAdminId?id=${SAdminId}`).toPromise();
-    // return this.schools.find(s => s.sadminId === SAdminId);
   }
 
   setCurrentSchool(school: any){

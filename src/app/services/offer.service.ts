@@ -10,14 +10,11 @@ export class OfferService {
   constructor(public authService: AuthService, public http: HttpClient) { }
 
   async getOfferByRequestId(requestId: number){
-    // return this.offers.filter(offer => offer.requestId === requestId);
     return await this.http.get(`${environment.apiUrl}/api/offer/getOfferByRequestId?id=${requestId}`).toPromise()
   }
 
   async approveOffer(offerId: number){
     await this.http.post(`${environment.apiUrl}/api/offer/approveOffer`, {id: offerId}).toPromise()
-    // let offer = this.offers.find(offer => offer.id === offerId);
-    // offer.status = 'APPROVED';
   }
 
   addOffer(requestId: string, remarks: string){

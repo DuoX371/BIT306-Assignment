@@ -6,6 +6,7 @@ const checkAuth = require('../middleware/check-auth');
 // Password encryption
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const token_exp = 60 * 60
 
 router.use((req, res, next) => { next(); })
 
@@ -47,6 +48,14 @@ router.post('/login', async (req, res) => {
     {expiresIn: 60 * 60}
   )
   return res.status(200).send({login: true, user: user, token: token})
+})
+
+router.put('/updateUserPassword', checkAuth('admin'), async (req, res) => {
+  const {username, password} = req.body;
+  const newPass = await bcrypt.hash(password, saltRounds)
+  const result = await User.findOneAndUpdate({username: username}, {password: newPass});
+  if(result === null) return res.status(400).send({update: false, message: 'An error occured'})
+  res.status(200).send({update: true, message: 'Password updated'})
 })
 
 //get all the users for admin page
