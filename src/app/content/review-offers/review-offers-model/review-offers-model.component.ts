@@ -31,7 +31,7 @@ export class ReviewOffersModelComponent implements OnInit {
   }
 
   clickedRow(data: any | object){
-    if(data.status === 'APPROVED') return;
+    if(data.status === 'ACCEPTED') return;
     Swal.mixin({
       icon: 'warning',
       showCancelButton: true,
@@ -46,7 +46,7 @@ export class ReviewOffersModelComponent implements OnInit {
       await this.offerService.approveOffer(data._id);
       //reload the data and update the table
       // either direct update the front end or reload the data by fetching the api again
-      data.status = 'APPROVED';
+      data.status = 'ACCEPTED';
       // this.offers = await this.offerService.getOfferByRequestId(this.dataInput._id)
     })
   }

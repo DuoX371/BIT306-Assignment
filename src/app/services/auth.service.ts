@@ -34,6 +34,12 @@ export class AuthService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
+  updateCurrentUserPfp(base64: string){
+    const user = this.getCurrentUser();
+    user.pfp = base64;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
   async login(data: any | object){
     const result = await this.http.post(`${environment.apiUrl}/api/auth/login`, data).toPromise()
       .then((res) => {
@@ -88,10 +94,23 @@ export class AuthService {
       })
   }
 
-
   async getAllUsers(){
     return await this.http.get(`${environment.apiUrl}/api/auth/getAllUsers`).toPromise()
   }
+
+  async updatePfp(base64: string){
+    // const res = await this.http.get(`https://api.imgbb.com/1/upload`).toPromise()
+    // console.log(res);
+    // this.updateCurrentUserPfp(base64);
+    // const user = this.getCurrentUser();
+    // // ensure check that token = to username
+    // return await this.http.put(`${environment.apiUrl}/api/auth/updateUserPfp`, {username: user.username, base64: base64}).toPromise()
+    //   .then((res) => {
+    //     return {success: true, message: ``};
+    //   }).catch((err) => {
+    //     return {success: false, message: err.error.message};
+    //   })
+    }
 
   logout(){
     localStorage.removeItem('currentUser');

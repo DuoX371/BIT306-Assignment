@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const Offer = require('../models/offer')
+const User = require('../models/user')
 const checkAuth = require('../middleware/check-auth')
+const transporter = require('../nodemailer').transporter;
 
 router.use((req, res, next) => {
   next();
 })
-
 // Get current logged in school admin school
 router.get('/getOfferByRequestId', checkAuth('sadmin'), async (req, res) => {
   const id = req.query.id;
@@ -39,9 +40,26 @@ router.get('/getOfferByRequestId', checkAuth('sadmin'), async (req, res) => {
 router.post('/approveOffer', checkAuth('sadmin'), async (req, res) => {
   const id = req.body.id;
   if(!id) return res.status(400).send({message: 'id is required'});
-  await Offer.findOneAndUpdate({_id: id}, {status: 'APPROVED'}, {new: true});
+  await Offer.findOneAndUpdate({_id: id}, {status: 'ACCEPTED'}, {new: true});
   //NOTIFIY THEIR EMAIL
-  return res.status(200).send({message: 'Offer approved'});
+  const offer = await Offer.findOne({_id: id})
+  const volun = await User.findOne({_id: offer.volunId})
+  const info = await transporter.sendMail({
+    from: '"Tetratheos" <choojiahan@gmail.com>', // sender address
+    to: volun.email, // list of receivers
+    subject: `Offer Accepted #${offer._id}`, // Subject line
+    text: `Hello ${volun.fullname}. I would like to inform you that your offer for #${offer._id} has been accepted.`, // plain text body
+  });
+  // Send to the school admin that approve
+  const info2 = await transporter.sendMail({
+    from: '"Tetratheos" <choojiahan@gmail.com', // sender address
+    to: res.userData.email, // list of receivers
+    subject: `Offer Accepted #${offer._id}`, // Subject line
+    text: `Hello ${res.userData.fullname}. You have accepted the offer #${offer._id} by user ${volun.fullname}.`, // plain text body
+  });
+  console.log(info)
+  console.log(info2)
+  return res.status(200).send({message: 'Offer accepted'});
 })
 
 router.get('/getMyOffers', checkAuth('volunteer'), async (req, res) => {

@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
   const token = jwt.sign(
     JSON.parse(JSON.stringify(user)),
     `some_very_long_secret_and_i_am_trying_to_make_it_even_longer`,
-    {expiresIn: 60 * 60}
+    {expiresIn: token_exp}
   )
   return res.status(200).send({login: true, user: user, token: token})
 })
@@ -56,6 +56,11 @@ router.put('/updateUserPassword', checkAuth('admin'), async (req, res) => {
   const result = await User.findOneAndUpdate({username: username}, {password: newPass});
   if(result === null) return res.status(400).send({update: false, message: 'An error occured'})
   res.status(200).send({update: true, message: 'Password updated'})
+})
+
+router.put('updateUserPfp', checkAuth(), async (req, res) => {
+  // console.log(res.userData)
+  // res.send('ok')
 })
 
 //get all the users for admin page

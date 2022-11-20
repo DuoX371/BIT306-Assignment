@@ -22,3 +22,13 @@ mat-toolbar {
   font: 400 18px Roboto, "Helvetica Neue", sans-serif;
 }
 
+.profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-clip: padding-box;
+  float: left;
+  background-size: cover;
+  background-position: center center;
+  margin-right: 20px;
+}

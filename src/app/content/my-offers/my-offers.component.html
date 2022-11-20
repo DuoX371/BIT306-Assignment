@@ -8,7 +8,7 @@
       <mat-select (selectionChange)="applyTypeFilter($event)">
         <mat-option>--</mat-option>
         <mat-option [value]="'PENDING'">Pending</mat-option>
-        <mat-option [value]="'APPROVED'">Approved</mat-option>
+        <mat-option [value]="'ACCEPTED'">ACCEPTED</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -44,7 +44,7 @@
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element" [ngClass]="element.status == 'APPROVED' ? 'text-success fw-bold' : 'text-warning fw-bold'"> {{element.status}} </td>
+      <td mat-cell *matCellDef="let element" [ngClass]="element.status == 'ACCEPTED' ? 'text-success fw-bold' : 'text-warning fw-bold'"> {{element.status}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
