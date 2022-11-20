@@ -49,16 +49,17 @@ router.post('/approveOffer', checkAuth('sadmin'), async (req, res) => {
     to: volun.email, // list of receivers
     subject: `Offer Accepted #${offer._id}`, // Subject line
     text: `Hello ${volun.fullname}. I would like to inform you that your offer for #${offer._id} has been accepted.`, // plain text body
-  });
+  }).catch(err => console.log(err))
   // Send to the school admin that approve
   const info2 = await transporter.sendMail({
     from: '"Tetratheos" <choojiahan@gmail.com', // sender address
     to: res.userData.email, // list of receivers
     subject: `Offer Accepted #${offer._id}`, // Subject line
     text: `Hello ${res.userData.fullname}. You have accepted the offer #${offer._id} by user ${volun.fullname}.`, // plain text body
-  });
+  }).catch(err => console.log(err))
   console.log(info)
   console.log(info2)
+  // Add a loader to the frontend
   return res.status(200).send({message: 'Offer accepted'});
 })
 
