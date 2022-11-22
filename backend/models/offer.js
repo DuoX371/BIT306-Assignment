@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const offerSchema = mongoose.Schema({
-  remarks: {type: String, required: true},
+  remarks: {type: String, required: false},
   status: {type: String, required: true},
   requestId: {type: String, required: true},
   volunId: {type: String, required: true},

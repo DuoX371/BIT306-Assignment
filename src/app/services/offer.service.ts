@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
+import { Offer } from '../models/offer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +18,25 @@ export class OfferService {
     await this.http.post(`${environment.apiUrl}/api/offer/approveOffer`, {id: offerId}).toPromise()
   }
 
-  addOffer(requestId: string, remarks: string){
-    // const user = this.authService.getCurrentUser();
-    // let offer = {
-    //   id: this.offers.length + 1,
-    //   remarks: remarks,
-    //   status: 'PENDING',
-    //   requestId: parseInt(requestId),
-    //   volunId: user.id
-    // }
-    // this.offers.push(offer);
+
+  async addOffer(requestId: string, remarks: string){
+    const user = this.authService.getCurrentUser();
+    let offer = {
+      remarks: remarks,
+      status: 'PENDING',
+      requestId: requestId,
+      volunId: user._id
+    }
+    
+    return await this.http.post(`${environment.apiUrl}/api/offer/addOffer`, offer).toPromise()
+      .then(res => {
+        console.log(res);
+        return true;
+      })
+      .catch(err => {
+        console.log(err);
+        return false;
+      })
   }
 
   async getMyOffers(){

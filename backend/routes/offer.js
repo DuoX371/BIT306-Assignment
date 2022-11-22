@@ -84,4 +84,21 @@ router.get('/getMyOffers', checkAuth('volunteer'), async (req, res) => {
   res.status(200).send(offers)
 })
 
+router.post('/addOffer', checkAuth('volunteer'), async (req, res) => {
+  const newOffer = new Offer(req.body);
+  const offerCheck = await Offer.findOne(
+    {requestId: req.body.requestId, volunId: req.body.volunId},
+  );
+
+  if (offerCheck != null){
+    return res.status(400).send({data: "Error"});
+  }
+  newOffer.save().then((result) => {
+    return res.status(200).send(result);
+  }).catch((err) => {
+    return res.status(500).send(err);
+  })
+}
+)
+
 module.exports = router;

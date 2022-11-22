@@ -37,24 +37,46 @@ export class ViewRequestModelComponent implements OnInit {
     }).fire({
       title: 'Are you sure you want to submit offer?',
       text: 'You will not be able to change your offer after submission.',
-    }).then((result) => {
+    }).then(async (result) => {
       if(!result.isConfirmed) return;
       //add offers
       const remarks = result.value;
-      this.offerService.addOffer(this.dataInput.id, remarks);
+      const check  = await this.offerService.addOffer(this.dataInput._id, remarks);
+      const currentUrl = this.router.url;
 
-      Swal.mixin({
-        icon: 'success',
-        showCancelButton: false,
-        showConfirmButton: false,
-        heightAuto: false,
-        timer: 3000,
-      }).fire({
-        title: 'Offer submitted successfully!',
-        text: 'You will be notified once the request is accepted.',
-      }).then(() => {
-        this.viewRequestModel.closeAll();
-      })
+      if (check){
+        Swal.mixin({
+          icon: 'success',
+          showCancelButton: false,
+          showConfirmButton: false,
+          heightAuto: false,
+          timer: 3000,
+        }).fire({
+          title: 'Offer submitted successfully!',
+          text: 'You will be notified once the request is accepted.',
+        }).then(() => {
+          this.viewRequestModel.closeAll();
+        })
+
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+          this.router.navigate([currentUrl]);
+        });
+      } else {
+        Swal.mixin({
+          icon: 'error',
+          showCancelButton: false,
+          showConfirmButton: false,
+          heightAuto: false,
+          timer: 3000,
+        }).fire({
+          title: 'Error Occured',
+          text: 'Submit Failed.',
+        })
+      }
+      
+
+      
+
     })
 
     return true;
