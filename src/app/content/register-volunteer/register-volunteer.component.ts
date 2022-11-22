@@ -31,6 +31,7 @@ export class RegisterVolunteerComponent implements OnInit {
   async onRegister(){
     if(!this.registerForm.valid) return;
     const res = await this.authService.registerVolunteer(this.registerForm.value);
+    console.log(res)
     if(res.register){
       Swal.fire({
         icon: 'success',

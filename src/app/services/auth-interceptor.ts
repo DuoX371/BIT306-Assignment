@@ -1,6 +1,6 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError } from "rxjs";
+import { catchError, throwError } from "rxjs";
 import { AuthService } from "./auth.service";
 import Swal from 'sweetalert2';
 import { Router } from "@angular/router";
@@ -30,8 +30,9 @@ export class AuthInterceptor implements HttpInterceptor {
             this.router.navigate(['login']);
             this.authService.logout();
           })
+          throw new Error(res);
         }
-        throw new Error(res);
+        return throwError(res)
       })
      )
   }

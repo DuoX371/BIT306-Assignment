@@ -65,6 +65,7 @@ export class AuthService {
       })
       .catch((err) => {
         const error = err.error
+        console.log(err)
         if(error.username) return {register: false, message: `Username already exist`}
         if(error.email) return {register: false, message: `Email already exist`}
         return {register: false, message: `An error has occured. Please check the logs.`}
