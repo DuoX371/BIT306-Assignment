@@ -36,7 +36,7 @@ export class RegisterSchoolComponent implements OnInit {
       })
       this.loading = false;
     }else {
-      const currentUrl = this.router.url;
+      const currentUrl = this.router.url.split('?')[0];
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate([currentUrl]);
       });
