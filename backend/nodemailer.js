@@ -11,13 +11,3 @@ module.exports.transporter = nodemailer.createTransport({
     pass: pass, // generated ethereal password
   },
 });
-
-// module.exports.transporter = nodemailer.createTransport({
-//     host: "smtp-relay.sendinblue.com",
-//     port: 587,
-//     secure: false, // true for 465, false for other ports
-//     auth: {
-//       user: user, // generated ethereal user
-//       pass: pass, // generated ethereal password
-//     },
-//   });

@@ -58,18 +58,12 @@ router.put('/updateUserPassword', checkAuth('admin'), async (req, res) => {
   res.status(200).send({update: true, message: 'Password updated'})
 })
 
-router.put('updateUserPfp', checkAuth(), async (req, res) => {
-  // console.log(res.userData)
-  // res.send('ok')
-})
-
 //get all the users for admin page
 router.get('/getAllUsers', checkAuth('admin'), async (req, res) => {
   const users = await User.find();
   const list = JSON.parse(JSON.stringify(users));
   list.map((user) => {
     if(user.type !== 'sadmin') return
-
   })
   return res.status(200).send(users);
 })

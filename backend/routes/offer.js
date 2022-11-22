@@ -40,27 +40,32 @@ router.get('/getOfferByRequestId', checkAuth('sadmin'), async (req, res) => {
 router.post('/approveOffer', checkAuth('sadmin'), async (req, res) => {
   const id = req.body.id;
   if(!id) return res.status(400).send({message: 'id is required'});
-  await Offer.findOneAndUpdate({_id: id}, {status: 'ACCEPTED'}, {new: true});
+
   //NOTIFIY THEIR EMAIL
   const offer = await Offer.findOne({_id: id})
   const volun = await User.findOne({_id: offer.volunId})
+  const start = new Date()
   const info = await transporter.sendMail({
     from: '"Tetratheos" <choojiahan@gmail.com>', // sender address
     to: volun.email, // list of receivers
     subject: `Offer Accepted #${offer._id}`, // Subject line
     text: `Hello ${volun.fullname}. I would like to inform you that your offer for #${offer._id} has been accepted.`, // plain text body
-  }).catch(err => console.log(err))
+  }).then(res => {console.log(res);return true;}).catch(err => {console.log(err); return false;})
+  console.log(info)
   // Send to the school admin that approve
   const info2 = await transporter.sendMail({
     from: '"Tetratheos" <choojiahan@gmail.com', // sender address
     to: res.userData.email, // list of receivers
     subject: `Offer Accepted #${offer._id}`, // Subject line
     text: `Hello ${res.userData.fullname}. You have accepted the offer #${offer._id} by user ${volun.fullname}.`, // plain text body
-  }).catch(err => console.log(err))
+  }).then(res => {console.log(res);return true;}).catch(err => {console.log(err); return false;})
   console.log(info)
-  console.log(info2)
+  const end = new Date()
+  console.log(`Time taken: ${end - start}ms`)
+  // To update the offer after finish sending email
+  await Offer.findOneAndUpdate({_id: id}, {status: 'ACCEPTED'}, {new: true});
   // Add a loader to the frontend
-  return res.status(200).send({message: 'Offer accepted'});
+  return res.status(200).send({message: 'Offer accepted', volunMail: info, sadminMail: info2});
 })
 
 router.get('/getMyOffers', checkAuth('volunteer'), async (req, res) => {

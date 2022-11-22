@@ -6,7 +6,6 @@ const userSchema = mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   type: {type: String, required: true},
-  pfp: {data: Buffer, contentType: String, required: false},
   // volun/schooladmin
   fullname: {type: String, required: false},
   email: {type: String, required: false, unique: true},

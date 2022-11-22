@@ -98,20 +98,6 @@ export class AuthService {
     return await this.http.get(`${environment.apiUrl}/api/auth/getAllUsers`).toPromise()
   }
 
-  async updatePfp(base64: string){
-    // const res = await this.http.get(`https://api.imgbb.com/1/upload`).toPromise()
-    // console.log(res);
-    // this.updateCurrentUserPfp(base64);
-    // const user = this.getCurrentUser();
-    // // ensure check that token = to username
-    // return await this.http.put(`${environment.apiUrl}/api/auth/updateUserPfp`, {username: user.username, base64: base64}).toPromise()
-    //   .then((res) => {
-    //     return {success: true, message: ``};
-    //   }).catch((err) => {
-    //     return {success: false, message: err.error.message};
-    //   })
-    }
-
   logout(){
     localStorage.removeItem('currentUser');
     localStorage.removeItem('currentSchool');

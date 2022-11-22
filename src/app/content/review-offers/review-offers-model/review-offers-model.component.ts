@@ -43,7 +43,17 @@ export class ReviewOffersModelComponent implements OnInit {
       text: `Approve offer by ${data.volunteer}?`,
     }).then(async (result) => {
       if(!result.isConfirmed) return
+      // loading spinner
+      Swal.fire({
+        title: 'Approving offer',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        heightAuto: false,
+        didOpen: () => Swal.showLoading(),
+      })
       await this.offerService.approveOffer(data._id);
+      Swal.close()
       //reload the data and update the table
       // either direct update the front end or reload the data by fetching the api again
       data.status = 'ACCEPTED';
