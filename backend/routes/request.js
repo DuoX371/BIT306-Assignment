@@ -19,9 +19,9 @@ router.post('/submitRequest', checkAuth('sadmin'), async (req, res) => {
 
 //home page gets all new requests
 router.get('/getAllNewRequests', async (req, res) => {
+  // Aggregate for request to join user table to get the school information
   const request = await Request.aggregate([
-    {
-      $lookup: {
+    {$lookup: {
         from: 'users',
         let: { 'userId': {$toObjectId: "$sadminId"} },
         pipeline: [
@@ -32,8 +32,7 @@ router.get('/getAllNewRequests', async (req, res) => {
       },
     },
     {$unwind: "$user"},
-    {
-      $lookup: {
+    {$lookup: {
         from: 'schools',
         let: { 'schoolId': {$toObjectId: "$user.schoolId"} },
         pipeline: [
@@ -49,10 +48,12 @@ router.get('/getAllNewRequests', async (req, res) => {
   ]).catch((err) => {
     return res.status(500).send(err);
   })
+  // Rebuild the object to the desired format
   for(let i = 0; i < request.length; i++) {
     const r = request[i];
     r.city = r.school.city;
     r.school = r.school.name;
+    // If the user is logged in, check if the user has already made an offer for this request
     if(req.query.userId){
       const offer = await Offer.findOne({requestId: r._id, volunId: req.query.userId})
       r.offerStatus = offer === null ? 'no' : 'yes';

@@ -12,8 +12,7 @@ router.get('/getOfferByRequestId', checkAuth('sadmin'), async (req, res) => {
   const id = req.query.id;
   if(!id) return res.status(400).send({message: 'id is required'});
   let offers = await Offer.aggregate([
-    {
-      $lookup: {
+    {$lookup: {
         from: 'users',
         let: { 'userId': {$toObjectId: "$volunId"} },
         pipeline: [
@@ -42,6 +41,7 @@ router.post('/approveOffer', checkAuth('sadmin'), async (req, res) => {
   if(!id) return res.status(400).send({message: 'id is required'});
 
   //NOTIFIY THEIR EMAIL
+  await Offer.findOneAndUpdate({_id: id}, {status: 'ACCEPTED'}, {new: true});
   const offer = await Offer.findOne({_id: id})
   const volun = await User.findOne({_id: offer.volunId})
   const start = new Date()
@@ -59,11 +59,9 @@ router.post('/approveOffer', checkAuth('sadmin'), async (req, res) => {
     subject: `Offer Accepted #${offer._id}`, // Subject line
     text: `Hello ${res.userData.fullname}. You have accepted the offer #${offer._id} by user ${volun.fullname}.`, // plain text body
   }).then(res => {console.log(res);return true;}).catch(err => {console.log(err); return false;})
-  console.log(info)
-  const end = new Date()
-  console.log(`Time taken: ${end - start}ms`)
-  // To update the offer after finish sending email
-  await Offer.findOneAndUpdate({_id: id}, {status: 'ACCEPTED'}, {new: true});
+  console.log(info2)
+  console.log(`Time taken: ${new Date() - start}ms`)
+
   // Add a loader to the frontend
   return res.status(200).send({message: 'Offer accepted', volunMail: info, sadminMail: info2});
 })
