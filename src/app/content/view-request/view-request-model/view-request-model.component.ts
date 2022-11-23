@@ -42,7 +42,7 @@ export class ViewRequestModelComponent implements OnInit {
       //add offers
       const remarks = result.value;
       const check  = await this.offerService.addOffer(this.dataInput._id, remarks);
-      const currentUrl = this.router.url;
+      const currentUrl = '/view-request';
 
       if (check){
         Swal.mixin({
@@ -73,9 +73,9 @@ export class ViewRequestModelComponent implements OnInit {
           text: 'Submit Failed.',
         })
       }
-      
 
-      
+
+
 
     })
 
