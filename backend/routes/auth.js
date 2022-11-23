@@ -12,6 +12,8 @@ router.use((req, res, next) => { next(); })
 
 router.post('/registerSchoolAdmin', checkAuth('admin'), async (req, res) => {
   const newSAdmin = new User(req.body);
+  if (newSAdmin.password.length < 4) return res.status(400).json({ message: 'Password must be at least 4 characters long' });
+  newSAdmin.type = 'sadmin';
   newSAdmin.password = await bcrypt.hash(newSAdmin.password, saltRounds)
   newSAdmin.save((err) =>{
     if(err){
@@ -24,6 +26,8 @@ router.post('/registerSchoolAdmin', checkAuth('admin'), async (req, res) => {
 
 router.post('/registerVolunteer', async (req, res) => {
   const newVolunteer = new User(req.body);
+  if (newVolunteer.password.length < 4) return res.status(400).json({ message: 'Password must be at least 4 characters long' });
+  newVolunteer.type = 'volunteer';
   newVolunteer.password = await bcrypt.hash(newVolunteer.password, saltRounds)
   newVolunteer.save((err) =>{
     if(err){

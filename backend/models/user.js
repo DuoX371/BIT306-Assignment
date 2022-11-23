@@ -4,7 +4,7 @@ const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = mongoose.Schema({
   username: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
+  password: {type: String, required: true}, // Min length validation should be done before password is encrypted
   type: {type: String, required: true},
   // volun/schooladmin
   fullname: {type: String, required: false},
